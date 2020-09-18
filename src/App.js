@@ -1,11 +1,16 @@
 import React from 'react';
-import FixedMenu from './Components/FixedMenu'
+import NavBar from './Components/NavBar'
+import StaticLayout from './Components/StaticLayout'
+import Footer from './Components/Footer'
+
 // import ForecastContainer from './Containers/ForecastContainer'
 
 function App() {
   return (
     <>
-      <FixedMenu />
+      <NavBar />
+      <StaticLayout />
+      <Footer />
     </>
   );
 }
