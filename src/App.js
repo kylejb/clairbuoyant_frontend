@@ -1,12 +1,11 @@
 import React from 'react';
-import NavigationBar from './Components/navbar/navbar.component'
-import ForecastContainer from './Containers/ForecastContainer'
+import FixedMenu from './Components/FixedMenu'
+// import ForecastContainer from './Containers/ForecastContainer'
 
 function App() {
   return (
     <>
-      <NavigationBar />
-      <ForecastContainer />
+      <FixedMenu />
     </>
   );
 }
