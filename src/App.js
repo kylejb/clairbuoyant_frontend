@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from './Components/NavBar'
+import Header from './Components/Header'
 import StaticLayout from './Components/StaticLayout'
 import Footer from './Components/Footer'
 
@@ -8,7 +8,7 @@ import Footer from './Components/Footer'
 function App() {
   return (
     <>
-      <NavBar />
+      <Header />
       <StaticLayout />
       <Footer />
     </>

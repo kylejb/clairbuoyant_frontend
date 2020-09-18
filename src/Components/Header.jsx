@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Dropdown, Image, Menu } from 'semantic-ui-react';
 
-const NavBar = props => {
+const Header = props => {
     return (
         <Container>
             <Menu fixed='top' stackable inverted>
@@ -34,4 +34,4 @@ const NavBar = props => {
     );
 }
 
-export default NavBar;
+export default Header;
