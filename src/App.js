@@ -1,10 +1,13 @@
 import React from 'react';
+import NavigationBar from './Components/navbar/navbar.component'
+import ForecastContainer from './Containers/ForecastContainer'
 
 function App() {
   return (
-    <div className="App">
-      'App.js'
-    </div>
+    <>
+      <NavigationBar />
+      <ForecastContainer />
+    </>
   );
 }
 
