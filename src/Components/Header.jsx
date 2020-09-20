@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import HeaderSearch from './HeaderSearch';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Container, Dropdown, Image, Menu } from 'semantic-ui-react';
 
 const Header = props => {
@@ -24,10 +24,9 @@ const Header = props => {
     const renderDropdownItem = (beachObj) => {
         let urlPrefix = beachObj.name.replace(/\s+/g, '-').toLowerCase();
         // 'NY' needs to be dynamically rendered; best to adjust DB on backend to incorporate this field
-        return (<Dropdown.Item key={beachObj.id} as={Link} to={`/${urlPrefix}-surf-report`}>{beachObj.name}, NY</Dropdown.Item>)
+        return (<Dropdown.Item key={beachObj.id} onClick={() => props.selectedBeachHelper(beachObj)} as={Link} to={`/forecast/${urlPrefix}`}>{beachObj.name}, NY</Dropdown.Item>)
     }
 
-    console.log("Header Render ", namedBeaches)
     return (
         <Container>
             <Menu fixed='top' stackable inverted>
@@ -53,17 +52,17 @@ const Header = props => {
                     <i className='dropdown icon' />
                     <span className='text'>Canada</span>
                 <Dropdown.Menu>
-                    <Dropdown.Item as={Link} to='/tofino-surf-report'>Tofino, BC</Dropdown.Item>
+                    <Dropdown.Item as={Link} to='/forecast/tofino'>Tofino, BC</Dropdown.Item>
                 </Dropdown.Menu>
                 </Dropdown.Item>
                 {/* <Dropdown.Item>Placeholder List Item</Dropdown.Item> */}
             </Dropdown.Menu>
             </Dropdown>     
             <Menu.Item as={Link} to='/login'>Sign-in</Menu.Item>
-            <Menu.Item> <HeaderSearch beaches={namedBeaches}/> </Menu.Item>
+            <Menu.Item> <HeaderSearch beaches={namedBeaches} selectedBeachHelper={props.selectedBeachHelper}/> </Menu.Item>
             </Menu>
         </Container>
     );
 }
 
-export default Header;
+export default withRouter(Header);

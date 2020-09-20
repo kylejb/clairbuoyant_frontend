@@ -1,29 +1,31 @@
 import React, { Component } from 'react';
 import WaveContainer from './WaveContainer';
-import ForecastContainer from './ForecastContainer';
+import ForecastDashboard from '../Components/forecast/ForecastDashboard';
 
 class BeachContainer extends Component {
     state = {
-        meteorologicalData: []
+        buoys: []
     };
 
     getForecast = async () => {
-        let response = await fetch("http://localhost:3000/api/v1/buoys/1");
+        const beachId = this.props.beach.id
+        let response = await fetch(`http://localhost:3000/api/v1/beaches/${beachId}`);
         let data = await response.json();
-        this.setState({...this.state, meteorologicalData: data.meteorological_data})
+        this.setState({...this.state, buoys: data.buoys})
     }
 
     componentDidMount() {
         this.getForecast();
     };
 
-
+    
     render() {
         return (
             <>
                 <h1>Beach Container</h1>
-                <ForecastContainer meteorologicalData={this.state.meteorologicalData} />
-                <WaveContainer meteorologicalData={this.state.meteorologicalData} />
+                <h2>{this.props.beach.name}</h2>
+                {this.state.buoys ? <ForecastDashboard buoys={this.state.buoys} /> : null}
+                {/* <WaveContainer buoys={this.state.buoys} /> */}
             </>
         );
     }
