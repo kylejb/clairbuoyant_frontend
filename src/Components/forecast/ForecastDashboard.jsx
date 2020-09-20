@@ -1,8 +1,8 @@
 import React from 'react';
-import Temp from '../Components/forecast/Temp.component';
-import Tide from '../Components/forecast/Tide.component';
-import Wind from '../Components/forecast/wind/Wind.component';
-import CompassBase from '../Components/forecast/compass/CompassBase';
+import Temp from './Temp.component';
+import Tide from './Tide.component';
+import Wind from './wind/Wind.component';
+import CompassBase from './compass/CompassBase';
 
 import {
     Grid,
@@ -26,7 +26,7 @@ const style = {
     },
 };
 
-const ForecastContainer = props => {
+const ForecastDashboard = props => {
 
     return (
         <>
@@ -48,7 +48,7 @@ const ForecastContainer = props => {
                 <Segment>Tide Data</Segment>
             </Grid.Column>
             <Grid.Column>
-                <Segment>{props.meteorologicalData.length ? props.meteorologicalData[0].wind_speed : "Wind Data"}</Segment>
+                <Segment>{props.buoys.meteorologicalData ? props.meteorologicalData[0].wind_speed : "Wind Data"}</Segment>
                 <CompassBase />
             </Grid.Column>
             </Grid>
@@ -56,4 +56,4 @@ const ForecastContainer = props => {
     );
 }
 
-export default ForecastContainer;
+export default ForecastDashboard;
