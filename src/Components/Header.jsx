@@ -1,9 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import HeaderSearch from './HeaderSearch';
 import { Link } from 'react-router-dom';
 import { Container, Dropdown, Image, Menu } from 'semantic-ui-react';
 
 const Header = props => {
+    const [namedBeaches, setNamedBeaches] = useState([]);
+    // { name: "", latitude: null, longitude: null }
+
+    const getNamedBeaches = async () => {
+        const response = await fetch('http://localhost:3000/api/v1/beaches');
+        let data = await response.json();
+        setNamedBeaches(data);
+    }
+
+    useEffect(() => {
+        getNamedBeaches();
+    }, []);
+
+    const parseUSANamedBeaches = () => {
+        return namedBeaches.map(namedBeach => renderDropdownItem(namedBeach))
+    }
+
+    const renderDropdownItem = (beachObj) => {
+        let urlPrefix = beachObj.name.replace(/\s+/g, '-').toLowerCase();
+        return (<Dropdown.Item key={beachObj.id} as={Link} to={`/${urlPrefix}-surf-report`}>{beachObj.name}, NY</Dropdown.Item>)
+    }
+
+    console.log("Header Render ", namedBeaches)
     return (
         <Container>
             <Menu fixed='top' stackable inverted>
@@ -22,8 +45,7 @@ const Header = props => {
                     <i className='dropdown icon' />
                     <span className='text'>USA</span>
                     <Dropdown.Menu>
-                        <Dropdown.Item as={Link} to='/rockawaybeach-surf-report'>Rockaway Beach, NY</Dropdown.Item>
-                        <Dropdown.Item as={Link} to='/longbeach-surf-report'>Long Beach, NY</Dropdown.Item>
+                        {parseUSANamedBeaches()}
                     </Dropdown.Menu>
                 </Dropdown.Item>
                 <Dropdown.Item>
