@@ -1,14 +1,25 @@
 import _ from 'lodash'
 import React from 'react'
-import { Search, Grid } from 'semantic-ui-react'
+import { Search, Grid, Label } from 'semantic-ui-react'
 
-
-// const resultRenderer = ({ name }) => <Label content={name} />
+const resultRenderer = ({name, longtitude, latitude}) => (
+  
+  <div key='content' className='content'>
+    {name && <div className='name'>{name}</div>}
+    {longtitude && <div className='longtitude'>{longtitude}</div>}
+    {latitude && <div className='latitude'>{latitude}</div>}
+  </div>
+)
 
 class SearchExampleStandardCustom extends React.Component {
   state = {
     results: [],
     value: ''
+  }
+  
+  submitHandler = (e) => {
+    e.preventDefault();
+    this.props.beachSearch(this.state.results);
   }
 
   handleSearchChange = (e, data) => {
@@ -20,7 +31,8 @@ class SearchExampleStandardCustom extends React.Component {
       } else if (this.state.results.length) {
         this.setState({ results: [] })
       }}
-    );
+      
+      );
   }
 
   handleResults = (result) => {
@@ -30,6 +42,7 @@ class SearchExampleStandardCustom extends React.Component {
   }
 
   render(){
+    console.log("Beach Search State ", this.state)
     return (
       <>
       <br/>
@@ -44,13 +57,13 @@ class SearchExampleStandardCustom extends React.Component {
             onResultSelect={(e, data) => {
               e.preventDefault();
               this.setState({results: data})
-
             }}
             onSearchChange={this.handleSearchChange}
             // resultRenderer={resultRenderer}
             // results={this.state.results}
             value={this.state.value}
           />
+          <button onClick={this.submitHandler} />
         </Grid.Column>
       </Grid>
       </>
