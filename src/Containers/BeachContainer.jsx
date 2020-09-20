@@ -10,8 +10,7 @@ class BeachContainer extends Component {
     getForecast = async () => {
         let response = await fetch("http://localhost:3000/api/v1/buoys/1");
         let data = await response.json();
-        console.log(data)
-        this.setState({...this.state, meteorologicalData: data.meteorological_data}, () => console.log("Beach Container State ", this.state))
+        this.setState({...this.state, meteorologicalData: data.meteorological_data})
     }
 
     componentDidMount() {
@@ -20,7 +19,6 @@ class BeachContainer extends Component {
 
 
     render() {
-        console.log("Beach Container", this.props)
         return (
             <>
                 <h1>Beach Container</h1>
