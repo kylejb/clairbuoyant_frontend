@@ -23,6 +23,7 @@ const Header = props => {
 
     const renderDropdownItem = (beachObj) => {
         let urlPrefix = beachObj.name.replace(/\s+/g, '-').toLowerCase();
+        // 'NY' needs to be dynamically rendered; best to adjust DB on backend to incorporate this field
         return (<Dropdown.Item key={beachObj.id} as={Link} to={`/${urlPrefix}-surf-report`}>{beachObj.name}, NY</Dropdown.Item>)
     }
 
@@ -59,7 +60,7 @@ const Header = props => {
             </Dropdown.Menu>
             </Dropdown>     
             <Menu.Item as={Link} to='/login'>Sign-in</Menu.Item>
-            <Menu.Item> <HeaderSearch /> </Menu.Item>
+            <Menu.Item> <HeaderSearch beaches={namedBeaches}/> </Menu.Item>
             </Menu>
         </Container>
     );
