@@ -18,7 +18,9 @@ class BeachContainer extends Component {
         this.getForecast();
     };
 
+
     render() {
+        console.log("Beach Container", this.props)
         return (
             <>
                 <h1>Beach Container</h1>
