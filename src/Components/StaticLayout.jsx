@@ -1,24 +1,31 @@
 import React from 'react';
 import BeachContainer from '../Containers/BeachContainer';
+import BeachSearch from './BeachSearch';
 
+class StaticLayout extends React.Component {
+  state = {
+    beachSearch: "",
+    beachOptions: []
+  }
 
-//   <Header as='h3' content='Responsive Steps' style={style.h3} textAlign='center' />
+  async componentDidMount(){
+    let response = await fetch("http://localhost:3000/api/v1/beaches");
+    let data = await response.json();
+    this.setState({ ...this.state, beachOptions: data }, () => console.log("StaticLayout ", this.state.beachOptions));
+  }
 
-//   <Container style={style.last}>
-//     <Step.Group fluid>
-//       <Step icon='plane' title='Shipping' description='Choose your shipping options' />
-//       <Step active icon='dollar' title='Billing' description='Enter billing information' />
-//       <Step
-//         disabled
-//         icon='info circle'
-//         title='Confirm Order'
-//         description='Verify order details'
-//       />
-//     </Step.Group>
-//   </Container>
+  beachSearchHandler = (searchValue) => {
+    this.setState({...this.state, beachSearch: searchValue})
+  }
 
-const StaticLayout = () => (
-  <BeachContainer />
-)
+  render(){
+    return (
+      <>
+        <BeachSearch beachSearch={this.beachSearchHandler} beachOptions={this.state.beachOptions} />
+        <BeachContainer beach={this.state.beachSearch} />
+      </>
+    );
+  }
+}
 
-export default StaticLayout
+export default StaticLayout;

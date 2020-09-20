@@ -1,8 +1,8 @@
 import React from 'react';
 import Temp from '../Components/forecast/Temp.component';
 import Tide from '../Components/forecast/Tide.component';
-import Wind from '../Components/forecast/Wind.component';
-import Circle from '../Components/Circle';
+import Wind from '../Components/forecast/wind/Wind.component';
+import CompassBase from '../Components/forecast/compass/CompassBase';
 
 import {
     Grid,
@@ -28,8 +28,6 @@ const style = {
 
 const ForecastContainer = props => {
 
-    
-
     return (
         <>
          <Header as='h3' content='Forecast Container' style={style.h3} textAlign='center' />
@@ -51,7 +49,7 @@ const ForecastContainer = props => {
             </Grid.Column>
             <Grid.Column>
                 <Segment>{props.meteorologicalData.length ? props.meteorologicalData[0].wind_speed : "Wind Data"}</Segment>
-                <Circle />
+                <CompassBase />
             </Grid.Column>
             </Grid>
         </>

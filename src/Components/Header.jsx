@@ -8,7 +8,7 @@ const Header = props => {
             <Menu fixed='top' stackable inverted>
             <Menu.Item as='a' header>
                 <Image size='mini' src='/logo.png' style={{ marginRight: '1.5em' }} />
-                Oh, Buoy!
+                Sea State
             </Menu.Item>
             <Menu.Item as={Link} to='/home'>Home</Menu.Item>
             <Dropdown item simple text='Dropdown'>
