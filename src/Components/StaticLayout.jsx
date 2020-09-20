@@ -11,7 +11,7 @@ class StaticLayout extends React.Component {
   async componentDidMount(){
     let response = await fetch("http://localhost:3000/api/v1/beaches");
     let data = await response.json();
-    this.setState({ ...this.state, beachOptions: data }, () => console.log("StaticLayout ", this.state.beachOptions));
+    this.setState({ ...this.state, beachOptions: data });
   }
 
   beachSearchHandler = (searchValue) => {
