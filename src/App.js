@@ -5,11 +5,11 @@ import StaticLayout from './Components/StaticLayout';
 
 const App = () => {
   const [selectedBeach, setSelectedBeach] = useState("")
-
+  
   const selectedBeachHelper = (beachObj) => {
     setSelectedBeach(beachObj)
   }
-  
+
   return (
     <>
       <Header selectedBeachHelper={selectedBeachHelper} />
