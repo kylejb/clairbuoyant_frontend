@@ -1,5 +1,5 @@
 import React from 'react';
-import WaveModel from '../Components/forecast/WaveModel.component';
+import WaveModel from '../Components/forecast/wave/WaveModel.component';
 import { Container, Header } from 'semantic-ui-react';
 
 const style = {
@@ -23,11 +23,10 @@ const WaveContainer = props => {
     return (
         <>
         <Header as='h3' content='Wave Container' style={style.h3} textAlign='center' />
-        <Container>
-            <WaveModel />
-        </Container>
+        <WaveModel />
         </>
     );
+
 }
 
 export default WaveContainer;
