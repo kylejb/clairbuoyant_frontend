@@ -29,10 +29,10 @@ const WaveModel = () => {
         
         <canvas id="simulator"></canvas>  
 
-        <Script src="../../../public/shared.js" async={false} />  
-        <Script src="../../../public/simulation.js" async={false} />    
-        <Script src="../../../public/ui.js" async={false} />    
-        <Script src="../../../public/waves.js" async={false} />
+        <Script src="./shared.js" async={false} />  
+        <Script src="./simulation.js" async={false} />    
+        <Script src="./ui.js" async={false} />    
+        <Script src="./waves.js" async={false} />
         </>
     );
   
