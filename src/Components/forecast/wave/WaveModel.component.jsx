@@ -1,6 +1,6 @@
 import React from 'react';
-import Script from '../../Hooks/Script.js'
-import './wave/waves.css';
+import Script from '../../../Hooks/Script.js'
+import './waves.css';
 
 const WaveModel = () => {
 
