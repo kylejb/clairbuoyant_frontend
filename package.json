@@ -1,6 +1,5 @@
 {
   "name": "capstone_frontend",
-  "type": "module",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,6 +10,7 @@
     "postprocessing": "^6.17.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-globe.gl": "^2.12.4",
     "react-router-dom": "^5.2.0",
     "react-script-tag": "^1.1.2",
     "react-scripts": "3.4.3",
@@ -39,6 +39,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {}
+  }
 }
