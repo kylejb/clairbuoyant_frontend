@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import BeachContainer from '../Containers/BeachContainer';
+import WorldMap from './worldmap/WorldMap';
 
 const StaticLayout = props => {
 
@@ -19,6 +20,8 @@ const StaticLayout = props => {
   return (
     <>
       <Route path='/forecast' render={() => <BeachContainer beach={props.beach} />} />
+      <WorldMap />
+
     </>
   );
   
