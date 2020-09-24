@@ -22,10 +22,9 @@ class BeachContainer extends Component {
     render() {
         return (
             <>
-                <h1>Beach Container</h1>
                 <h2>{this.props.beach.name}</h2>
                 {this.state.buoys ? <ForecastDashboard buoys={this.state.buoys} /> : null}
-                <WaveContainer />
+                {/* <WaveContainer /> */}
             </>
         );
     }

@@ -20,7 +20,7 @@ const StaticLayout = props => {
   return (
     <>
       <Route path='/forecast' render={() => <BeachContainer beach={props.beach} />} />
-      <WorldMap />
+      {/* <WorldMap /> */}
 
     </>
   );
