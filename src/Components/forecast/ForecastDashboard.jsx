@@ -28,9 +28,10 @@ const style = {
 
 const ForecastDashboard = props => {
 
+    console.log(props)
     return (
         <>
-         <Header as='h3' content='Forecast Container' style={style.h3} textAlign='center' />
+         <Header as='h3' content='Forecast' style={style.h3} textAlign='center' />
             <Grid columns={3} doubling stackable>
             <Grid.Column>
                 <Segment> <Temp /> </Segment>
