@@ -15,7 +15,7 @@ const App = () => {
     <>
       <Header selectedBeachHelper={selectedBeachHelper} />
       <ForecastGlobe />
-      {/* <StaticLayout beach={selectedBeach} /> */}
+      <StaticLayout beach={selectedBeach} />
       {/* <Footer /> */}
     </>
   );
