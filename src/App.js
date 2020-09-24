@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from './Components/Header';
 import StaticLayout from './Components/StaticLayout';
 // import Footer from './Components/Footer'
+import ForecastGlobe from './Components/worldmap/Globe';
 
 const App = () => {
   const [selectedBeach, setSelectedBeach] = useState("")
@@ -13,7 +14,8 @@ const App = () => {
   return (
     <>
       <Header selectedBeachHelper={selectedBeachHelper} />
-      <StaticLayout beach={selectedBeach} />
+      <ForecastGlobe />
+      {/* <StaticLayout beach={selectedBeach} /> */}
       {/* <Footer /> */}
     </>
   );
