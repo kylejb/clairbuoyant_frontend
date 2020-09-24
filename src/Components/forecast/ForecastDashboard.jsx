@@ -1,12 +1,12 @@
 import React from 'react';
 import Temp from './Temp.component';
-import Tide from './Tide.component';
+import Wave from './Wave.component';
 import Wind from './wind/Wind.component';
 import CompassBase from './compass/CompassBase';
 
 import {
     Grid,
-    Header,
+    Message,
     Segment,
   } from 'semantic-ui-react';
   
@@ -19,7 +19,7 @@ const style = {
     },
     h3: {
     marginTop: '2em',
-    padding: '2em 0em',
+    padding: '2em 0em'
     },
     last: {
     marginBottom: '300px',
@@ -28,28 +28,18 @@ const style = {
 
 const ForecastDashboard = props => {
 
-    console.log(props)
     return (
         <>
-         <Header as='h3' content='Forecast' style={style.h3} textAlign='center' />
+         <Message as='h3' content={props.beach.name} style={style.h3} textAlign='center' />
             <Grid columns={3} doubling stackable>
             <Grid.Column>
-                <Segment> <Temp /> </Segment>
+                <Segment> <Temp temp={props.beach ? props.beach.buoys[0].meteorological_data[0].sea_temp : "Loading..."}/> </Segment>
             </Grid.Column>
             <Grid.Column>
-                <Segment> <Tide /> </Segment>
+                <Segment> <Wave wave={props.beach ? props.beach.buoys[0].meteorological_data[0].wave_height : "Loading..."} /> </Segment>
             </Grid.Column>
             <Grid.Column>
-                <Segment> <Wind /> </Segment>
-            </Grid.Column>
-            <Grid.Column>
-                <Segment>Temp Data</Segment>
-            </Grid.Column>
-            <Grid.Column>
-                <Segment>Tide Data</Segment>
-            </Grid.Column>
-            <Grid.Column>
-                <Segment>{props.buoys.meteorologicalData ? props.meteorologicalData[0].wind_speed : "Wind Data"}</Segment>
+                <Segment> <Wind wind={props.beach ? props.beach.buoys[0].meteorological_data[0].wind_speed : "Loading..."}/> </Segment>
                 <CompassBase />
             </Grid.Column>
             </Grid>
