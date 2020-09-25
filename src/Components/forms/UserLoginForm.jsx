@@ -7,7 +7,15 @@ const UserLoginForm = props => {
     const handleSubmitHelper = (e) => {
         e.preventDefault();
         console.log("LoginForm Submitted")
-    }
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({ user: { email: email, password: password } })
+        }
+        fetch("http://localhost:3000/api/v1/login", options).then(res=>res.json()).then(user => props.setToken(user.jwt))    }
 
     return (
         <>
@@ -18,7 +26,7 @@ const UserLoginForm = props => {
                 <input type="submit" />
             </form>
         </>
-    )
+    );
 }
 
 export default UserLoginForm;

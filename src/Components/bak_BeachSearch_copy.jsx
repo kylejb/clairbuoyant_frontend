@@ -11,9 +11,6 @@ const BeachSearch = props => {
     
     return (
         <form onSubmit={searchSubmitHelper}>
-            <br/>
-            <br/>
-            <br/>
             <input value={beachSearchValue} onChange={(e) => setBeachSearchValue(e.target.value)}></input>
             <input type="submit" value="Search"></input>
         </form>

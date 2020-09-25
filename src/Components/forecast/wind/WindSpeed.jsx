@@ -3,7 +3,7 @@ import React from 'react';
 const WindSpeed = props => {
 
     return (
-        <p className="card-sub-heading">Wind Speed
+        <p className="card-sub-heading">
             <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink">
                 <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                     <g id="Weather-Dashboard" transform="translate(-945.000000, -519.000000)">
