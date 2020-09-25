@@ -9,11 +9,11 @@ const WindCard = props => {
             <h1>Wind Chart</h1>
             <div className="card-heading"> Wind Status</div>
             <div className="card-value mt-4"> 
-                <WindDirection /> NW
+                <WindDirection /> {props.windDir}˚
             </div>
             <div>
                 <WindSpeed />
-                <p className="card-value mt-4">1 km/h</p>
+                <p className="card-value mt-4">{props.windSpeed} km/h</p>
             </div>
         </>
     );
