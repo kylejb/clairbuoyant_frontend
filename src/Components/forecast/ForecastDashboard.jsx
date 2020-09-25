@@ -27,19 +27,19 @@ const style = {
 };
 
 const ForecastDashboard = props => {
-
+    console.log("FD ", props)
     return (
         <>
-         <Message as='h3' content={props.beach.name} style={style.h3} textAlign='center' />
+         <Message as='h3' content={props.beach.name} style={style.h3} />
             <Grid columns={3} doubling stackable>
             <Grid.Column>
-                <Segment> <Temp temp={props.beach ? props.beach.buoys[0].meteorological_data[0].sea_temp : "Loading..."}/> </Segment>
+                <Segment> <Temp temp={props.beach ? props.beach.buoys[0].meteorological_data[1].sea_temp : "Loading..."}/> </Segment>
             </Grid.Column>
             <Grid.Column>
-                <Segment> <Wave wave={props.beach ? props.beach.buoys[0].meteorological_data[0].wave_height : "Loading..."} /> </Segment>
+                <Segment> <Wave wave={props.beach ? props.beach.buoys[0].meteorological_data[1].wave_height : "Loading..."} /> </Segment>
             </Grid.Column>
             <Grid.Column>
-                <Segment> <Wind wind={props.beach ? props.beach.buoys[0].meteorological_data[0].wind_speed : "Loading..."}/> </Segment>
+                <Segment> <Wind windDir={props.beach ? props.beach.buoys[0].meteorological_data[1].wind_dir : "Loading..."} windSpeed={props.beach ? props.beach.buoys[0].meteorological_data[1].wind_speed : "Loading..."}/> </Segment>
                 <CompassBase />
             </Grid.Column>
             </Grid>
