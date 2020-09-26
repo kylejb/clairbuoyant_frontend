@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import WaveContainer from './WaveContainer';
 import ForecastDashboard from '../Components/forecast/ForecastDashboard';
 
 class BeachContainer extends Component {
@@ -22,10 +21,7 @@ class BeachContainer extends Component {
     render() {
         return (
             <>
-                {/* <h2>{this.props.beach.name}</h2> */}
                 <ForecastDashboard beach={this.props.beach} />
-                {/* {this.state.buoys ? <ForecastDashboard buoys={this.state.buoys} /> : null} */}
-                {/* <WaveContainer /> */}
             </>
         );
     }
