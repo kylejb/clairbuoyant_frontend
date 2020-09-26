@@ -51,8 +51,8 @@ const ForecastGlobe = () => {
                     labelLat={d => d.coordinates[1]}
                     labelLng={d => d.coordinates[0]}
                     labelText={d =>"Buoy"}
-                    labelSize={500 * 4e-4}
-                    labelDotRadius={500 * 4e-4}
+                    labelSize={0 * 4e-4}
+                    labelDotRadius={250 * 4e-4}
                     labelColor={() => 'rgba(255, 165, 0, 0.75)'}
                     labelResolution={2}
             />
