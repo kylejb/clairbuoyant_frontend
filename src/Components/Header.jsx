@@ -5,8 +5,9 @@ import { Container, Dropdown, Image, Menu } from 'semantic-ui-react';
 
 const Header = props => {
     const [namedBeaches, setNamedBeaches] = useState([]);
-    // { name: "", latitude: null, longitude: null }
+    // const currentUser = JSON.parse(localStorage.getItem('loggedIn'));
 
+    // { name: "", latitude: null, longitude: null }
     const getNamedBeaches = async () => {
         const response = await fetch('http://localhost:3000/api/v1/beaches');
         let data = await response.json();
@@ -55,7 +56,6 @@ const Header = props => {
                     <Dropdown.Item as={Link} to='/forecast/tofino'>Tofino, BC</Dropdown.Item>
                 </Dropdown.Menu>
                 </Dropdown.Item>
-                {/* <Dropdown.Item>Placeholder List Item</Dropdown.Item> */}
             </Dropdown.Menu>
             </Dropdown>     
             <Menu.Item as={Link} to='/login'>Sign-in</Menu.Item>
