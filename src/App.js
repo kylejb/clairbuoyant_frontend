@@ -13,11 +13,11 @@ const App = () => {
   const selectedBeachHelper = (beachObj) => {
     setSelectedBeach(beachObj)
   }
-  console.log("App render ", currentUserToken)
+
   return (
     <>
       <Header selectedBeachHelper={selectedBeachHelper} userToken={currentUserToken} />
-      {/* <ForecastGlobe /> */}
+      <ForecastGlobe />
       <StaticLayout beach={selectedBeach} userToken={currentUserToken} />
       {/* <Footer /> */}
       <Route exact path="/login" render={() => <LoginForm setToken={setCurrentUserToken}/>} />
