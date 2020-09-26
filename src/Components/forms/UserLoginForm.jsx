@@ -15,7 +15,13 @@ const UserLoginForm = props => {
             },
             body: JSON.stringify({ user: { email: email, password: password } })
         }
-        fetch("http://localhost:3000/api/v1/login", options).then(res=>res.json()).then(user => props.setToken(user.jwt))    }
+        fetch("http://localhost:3000/api/v1/login", options).then(res=>res.json()).then(user => {
+            // localStorage for MVP only
+            localStorage.setItem("loggedIn", JSON.stringify(user.jwt));
+            props.setToken(user.jwt);
+
+        })
+    }
 
     return (
         <>
