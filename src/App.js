@@ -1,12 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { Route } from 'react-router-dom';
+import Header from './Components/Header';
+import StaticLayout from './Components/StaticLayout';
+// import Footer from './Components/Footer'
+import ForecastGlobe from './Components/worldmap/Globe';
+import LoginForm from './Components/forms/UserLoginForm'
 
-function App() {
+const App = () => {
+  const [selectedBeach, setSelectedBeach] = useState(null),
+        [currentUserToken, setCurrentUserToken] = useState(null);
+  
+  const selectedBeachHelper = (beachObj) => {
+    setSelectedBeach(beachObj)
+  }
+
   return (
-    <div className="App">
-      'App.js'
-    </div>
+    <>
+      <Header selectedBeachHelper={selectedBeachHelper} userToken={currentUserToken} />
+      <ForecastGlobe />
+      <StaticLayout beach={selectedBeach} userToken={currentUserToken} />
+      {/* <Footer /> */}
+      <Route exact path="/login" render={() => <LoginForm setToken={setCurrentUserToken}/>} />
+    </>
   );
 }
 
