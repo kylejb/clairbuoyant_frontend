@@ -1,66 +1,44 @@
 import React, {useState, useEffect, useRef} from 'react';
 import Globe from 'react-globe.gl';
-   
-	
-
-    // Convert the XML document to an array of objects.
-    // Note that querySelectorAll returns a NodeList, not a proper Array,
-    // so we must use map.call to invoke array methods.
-//     data = [].map.call(data.querySelectorAll("station"), function(station) {
-//         console.log(station)
-//         return {
-//             station: station.getAttribute("id"),
-//             frequency: +station.querySelector("lon").textContent
-//         };
-//     });
-// })
 
 
 const ForecastGlobe = () => {
-    const [buoys, setBuoys] = useState([])
-    const globeEl = useRef();
+    const [buoys, setBuoys] = useState([]), 
+        globeEl = useRef(),
+        currentUser = JSON.parse(localStorage.getItem('loggedIn'));
+
     
 
-    const parseXmlBuoyData = (xmlData) => {
-        const parser = new DOMParser(),
-              dom = parser.parseFromString(xmlData, "application/xml");
+    const parseBuoyData = (buoyObjArr) => {
     
-        const parsedArr = []
-        for (const buoy of dom.all) {
-            if (buoy.attributes[2] && buoy.attributes[1]){
-                const newBuoyObj = {}, coordinates = [buoy.attributes[2].value, buoy.attributes[1].value];
-                newBuoyObj.name = (buoy.attributes[3].value === "0" ? buoy.attributes[4].value : buoy.attributes[3].value); newBuoyObj.coordinates = coordinates;
-                parsedArr.push(newBuoyObj)
-    
+        const parsedBuoyObjArr = []
+        for (const buoy of buoyObjArr) {
+            if (buoy.longitude && buoy.latitude){
+                const newBuoyObj = {}, coordinates = [buoy.longitude, buoy.latitude];
+                newBuoyObj.name = buoy.station_name; newBuoyObj.coordinates = coordinates;
+                parsedBuoyObjArr.push(newBuoyObj)
             }
         }
-        setBuoys(parsedArr)
+        setBuoys(parsedBuoyObjArr)
     }
     
-    const extractXmlBuoys = () => {
-        const xhr = new XMLHttpRequest(),
-        method = "GET",
-        url = "https://raw.githubusercontent.com/mpiannucci/surfpy/master/surfpy/tests/data/activestations.xml";
-    
-        xhr.open(method, url, true);
-        xhr.onreadystatechange = function () {
-            // In local files, status is 0 upon success in Mozilla Firefox
-            if(xhr.readyState === XMLHttpRequest.DONE) {
-                var status = xhr.status;
-                if (status === 0 || (status >= 200 && status < 400)) {
-                // The request has been completed successfully
-                parseXmlBuoyData(xhr.responseText);
-                // console.log(xhr.responseText)
-                } else {
-                // Oh no! There has been an error with the request!
-                }
+    const fetchBuoys = async () => {
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${currentUser}`
             }
         };
-        xhr.send();
+
+        const response = await fetch("http://localhost:3000/api/v1/buoys", options);
+        let buoys = await response.json();
+        parseBuoyData(buoys);
     }
 
     useEffect(() => {
-        extractXmlBuoys()
+        fetchBuoys()
     }, [])
 
     return (
