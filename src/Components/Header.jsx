@@ -38,7 +38,7 @@ const Header = props => {
             <Menu.Item as={Link} to='/home'>Home</Menu.Item>
             <Dropdown item simple text='Forecasts'>
             <Dropdown.Menu>
-                <Dropdown.Item>Placeholder List Items</Dropdown.Item>
+                <Dropdown.Item as={Link} to='/journal'>Surf Log</Dropdown.Item>
                 <Dropdown.Item>Favorites</Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Header>Regions</Dropdown.Header>
