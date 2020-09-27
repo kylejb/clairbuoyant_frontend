@@ -17,7 +17,7 @@ const App = () => {
   return (
     <>
       <Header selectedBeachHelper={selectedBeachHelper} userToken={currentUserToken} />
-      <ForecastGlobe />
+      <Route exact path="/home" component={ForecastGlobe} />
       <StaticLayout beach={selectedBeach} userToken={currentUserToken} />
       {/* <Footer /> */}
       <Route exact path="/login" render={() => <LoginForm setToken={setCurrentUserToken}/>} />
