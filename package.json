@@ -15,6 +15,7 @@
     "react-scripts": "3.4.3",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^1.2.1",
+    "styled-components": "^5.2.0",
     "three": "^0.120.1",
     "topojson-client": "^3.1.0"
   },
