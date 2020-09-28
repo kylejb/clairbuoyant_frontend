@@ -10,17 +10,16 @@ const ForecastGlobe = () => {
     
 
     const parseBuoyData = (buoyObjArr) => {
-    
         const parsedBuoyObjArr = []
         for (const buoy of buoyObjArr) {
-            if (buoy.longitude && buoy.latitude){
-                const newBuoyObj = {}, coordinates = [buoy.longitude, buoy.latitude];
-                newBuoyObj.name = buoy.station_name; newBuoyObj.coordinates = coordinates;
-                parsedBuoyObjArr.push(newBuoyObj)
-            }
+            const newBuoyObj = {}, coordinates = [buoy.latitude, buoy.longitude], stationCode = buoy.station_code;
+            newBuoyObj.name = buoy.station_name; newBuoyObj.coordinates = coordinates; newBuoyObj.station_code = stationCode; newBuoyObj.id = buoy.id;
+            parsedBuoyObjArr.push(newBuoyObj)
         }
         setBuoys(parsedBuoyObjArr)
     }
+
+
     
     const fetchBuoys = async () => {
         const options = {
@@ -38,7 +37,9 @@ const ForecastGlobe = () => {
     }
 
     useEffect(() => {
-        fetchBuoys()
+        fetchBuoys();
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

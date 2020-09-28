@@ -16,15 +16,13 @@ const MapContainer = () => {
 
 
     const parseBuoyData = (buoyObjArr) => {
-        const parsedBuoyObjArr = []
+        const parsedBuoyObjArr = [];
         for (const buoy of buoyObjArr) {
-            if (buoy.longitude && buoy.latitude){
-                const newBuoyObj = {}, [latitude, longitude] = [buoy.latitude, buoy.longitude], stationCode = buoy.station_code;
-                newBuoyObj.name = buoy.station_name; newBuoyObj.latitude = latitude; newBuoyObj.longitude = longitude; newBuoyObj.station_code = stationCode; newBuoyObj.id = buoy.id;
-                parsedBuoyObjArr.push(newBuoyObj)
-            }
+            const newBuoyObj = {}, [latitude, longitude] = [buoy.latitude, buoy.longitude], stationCode = buoy.station_code;
+            newBuoyObj.name = buoy.station_name; newBuoyObj.latitude = latitude; newBuoyObj.longitude = longitude; newBuoyObj.station_code = stationCode; newBuoyObj.id = buoy.id;
+            parsedBuoyObjArr.push(newBuoyObj);
         }
-        setBuoys(parsedBuoyObjArr)
+        setBuoys(parsedBuoyObjArr);
     }
 
     const fetchBuoys = async () => {
@@ -42,11 +40,12 @@ const MapContainer = () => {
     }
 
     useEffect(() => {
-        fetchBuoys()
+        fetchBuoys();
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     
-    // console.log("Map Container Render:: ", selectedBuoy)
     return (
         <>
         <WorldMap buoys={buoys} />
