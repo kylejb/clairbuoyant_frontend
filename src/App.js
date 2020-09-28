@@ -21,9 +21,8 @@ const App = () => {
 
   return (
     <> 
-      <Route exact path="/map" component={MapContainer} />
-
       <Route path="/" render={ ( routerProps ) => <Header {...routerProps} selectedBeachHelper={selectedBeachHelper} />} />
+      <Route exact path="/map" component={MapContainer} />
       <Route exact path="/home" component={ForecastGlobe} />
       <StaticLayout beach={selectedBeach} />
       {/* <Footer /> */}
