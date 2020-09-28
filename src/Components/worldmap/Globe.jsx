@@ -8,19 +8,16 @@ const ForecastGlobe = () => {
         currentUser = JSON.parse(localStorage.getItem('loggedIn'));
 
     
-
     const parseBuoyData = (buoyObjArr) => {
-        const parsedBuoyObjArr = []
+        const parsedBuoyObjArr = [];
         for (const buoy of buoyObjArr) {
             const newBuoyObj = {}, coordinates = [buoy.latitude, buoy.longitude], stationCode = buoy.station_code;
             newBuoyObj.name = buoy.station_name; newBuoyObj.coordinates = coordinates; newBuoyObj.station_code = stationCode; newBuoyObj.id = buoy.id;
-            parsedBuoyObjArr.push(newBuoyObj)
+            parsedBuoyObjArr.push(newBuoyObj);
         }
-        setBuoys(parsedBuoyObjArr)
+        setBuoys(parsedBuoyObjArr);
     }
 
-
-    
     const fetchBuoys = async () => {
         const options = {
             method: 'GET',
@@ -42,18 +39,18 @@ const ForecastGlobe = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+
     return (
         <>
-            <h1>Globe</h1>
                 <Globe 
                     ref={globeEl}
                     globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
                     labelsData={buoys}
-                    labelLat={d => d.coordinates[1]}
-                    labelLng={d => d.coordinates[0]}
+                    labelLat={d => d.coordinates[0]}
+                    labelLng={d => d.coordinates[1]}
                     labelText={d =>"Buoy"}
                     labelSize={0 * 4e-4}
-                    labelDotRadius={250 * 4e-4}
+                    labelDotRadius={300 * 4e-4}
                     labelColor={() => 'rgba(255, 165, 0, 0.75)'}
                     labelResolution={2}
             />
