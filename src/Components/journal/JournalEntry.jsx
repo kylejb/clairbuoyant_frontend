@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const JournalEntry = ({entry, match}) => {
+const JournalEntry = ({ entry }) => {
     
+    console.log("Journal Entry ", entry)
     return (
         <>
             <h1>{entry.session_start_time}</h1>
             <p>{entry.entry}</p>
-            <Link to={`${match.url}/${entry.id}`}>Show</Link>
+            <Link to={`journal/${entry.id}`}>Show</Link>
         </>
     );
 }

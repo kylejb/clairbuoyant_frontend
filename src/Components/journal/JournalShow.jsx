@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import EditJournalEntry from './EditJournalEntry';
+import JournalEntryForm from './JournalEntryForm';
 
 const JournalShow = props => {
-    const [isFormVisible, setIsFormVisible] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
 
     const entry =  props.entries.find(entryObj=> entryObj.id === parseInt(props.match.params.entryId));
     
@@ -17,16 +17,15 @@ const JournalShow = props => {
                 <>
                     <h1>{entry.session_start_time}</h1>
                     <p>{entry.entry}</p>
-                    <button onClick={ () => setIsFormVisible(!isFormVisible)}>EDIT</button>
-                    {isFormVisible ? <EditJournalEntry entry={entry} updateHandler={props.updateHandler} /> : null}
+                    <button onClick={ () => setIsEditing(!isEditing)}>EDIT</button>
+                    {isEditing ? <JournalEntryForm isEditing={entry} updateHandler={props.updateHandler} /> : null}
                     <button onClick={handleDelete}>DELETE</button>
                 </> 
             );
         } else {
-            return `the params ItemId is ${props.match.params.entryId}`}
-    }
-    console.log("JournalShow ", props)
-    
+            return null
+        }
+    }    
     return renderPage();
 }
 
