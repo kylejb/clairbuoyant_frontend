@@ -15,7 +15,7 @@ const WorldMap = props => {
     }
 
     const renderBuoyEntries = () => {
-        return selectedBuoy.entries.map(selectedBuoyEntry => <li> {selectedBuoyEntry.entry} </li>)
+        return selectedBuoy.entries.map(selectedBuoyEntry => <li key={selectedBuoyEntry.id}> {selectedBuoyEntry.entry} </li>)
     }
 
 
