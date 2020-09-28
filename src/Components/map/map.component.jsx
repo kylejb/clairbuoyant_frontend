@@ -14,6 +14,10 @@ const WorldMap = props => {
         )
     }
 
+    const renderBuoyEntries = () => {
+        return selectedBuoy.entries.map(selectedBuoyEntry => <li> {selectedBuoyEntry.entry} </li>)
+    }
+
 
     return (
         /* 
@@ -54,6 +58,13 @@ const WorldMap = props => {
                     >
                         <div>
                             <h2>{selectedBuoy.station_name}</h2>
+                            { selectedBuoy.entries && (
+                                <div>
+                                    <ul>
+                                    {renderBuoyEntries()}
+                                    </ul>
+                                </div>
+                            )}
                             <p>{selectedBuoy.longitude}, {selectedBuoy.latitude}</p>
                         </div>
                     </Popup>
