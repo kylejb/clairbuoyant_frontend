@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Segment } from 'semantic-ui-react';
+
 import WorldMap from '../Components/map/map.component';
 import './map.css';
 
@@ -47,9 +49,9 @@ const MapContainer = () => {
 
     
     return (
-        <>
+        <Segment fluid style={{marginTop: '72px', maxHeight: '50px'}}>
             <WorldMap buoys={buoys} />
-        </>
+        </Segment>
     );
 }
 

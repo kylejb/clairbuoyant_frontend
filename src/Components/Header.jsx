@@ -28,7 +28,6 @@ const Header = props => {
     }
 
     return (
-        <Container>
             <Menu fixed='top' stackable inverted>
             <Menu.Item as='a' header>
                 <Image size='mini' src='/logo.png' style={{ marginRight: '1.5em' }} />
@@ -60,7 +59,6 @@ const Header = props => {
             <Menu.Item as={Link} to='/login'>Sign-in</Menu.Item>
             <Menu.Item> <HeaderSearch beaches={namedBeaches} selectedBeachHelper={props.selectedBeachHelper}/> </Menu.Item>
             </Menu>
-        </Container>
     );
 }
 
