@@ -4,20 +4,8 @@ import Globe from 'react-globe.gl';
 
 const ForecastGlobe = ({buoys}) => {
     const globeEl = useRef();
-    // const currentUser = JSON.parse(localStorage.getItem('loggedIn'));
 
     
-    const parseBuoyData = (buoyObjArr) => {
-        const parsedBuoyObjArr = [];
-        for (const buoy of buoyObjArr) {
-            const newBuoyObj = {}, coordinates = [buoy.latitude, buoy.longitude], stationCode = buoy.station_code;
-            newBuoyObj.name = buoy.station_name; newBuoyObj.coordinates = coordinates; newBuoyObj.station_code = stationCode; newBuoyObj.id = buoy.id;
-            parsedBuoyObjArr.push(newBuoyObj);
-        }
-        return parsedBuoyObjArr;
-    }
-    
-
     return (
         <>
                 <Globe 
