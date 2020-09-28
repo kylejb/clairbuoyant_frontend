@@ -48,38 +48,7 @@ const MapContainer = () => {
     
     return (
         <>
-        <WorldMap buoys={buoys} />
-
-        
-            {/* {buoys.map(buoy => (
-                <CircleMarker 
-                    key={buoy.stationCode} 
-                    center={[
-                        buoy.coordinates[0], 
-                        buoy.coordinates[1]
-                    ]}
-                    radius={8}
-                    onClick={ () => {
-                        fetchBuoyShow(buoy)
-                    }} 
-                />
-            ))}
-                {selectedBuoy && (
-                    <Popup
-                        position={[
-                            selectedBuoy.latitude,
-                            selectedBuoy.longitude
-                        ]}
-                        onClose={() => {
-                            setSelectedBuoy(null)
-                        }}
-                    >
-                        <div>
-                            <h2>{selectedBuoy.name}</h2>
-                            <p>{selectedBuoy.coordinates}</p>
-                        </div>
-                    </Popup>
-                )} */}
+            <WorldMap buoys={buoys} />
         </>
     );
 }
