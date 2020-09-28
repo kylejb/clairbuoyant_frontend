@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const JournalEntryForm = props => {
-    const [entry, setEntry] = useState({ buoy_id: "", beach: {name: "", longitude: "", latitude: ""}, session_duration: "", entry: "", wave_quality: "", session_start_time: ""})
+    //? beach = {name: null, longitude: null, latitude: null}
+    const [entry, setEntry] = useState({ buoy_id: "", beach: "", session_duration: "", entry: "", wave_quality: "", session_start_time: ""})
     // const [entryBeachDD, setEntryBeachDD] = useState(null);
 
-    //! consolidate fetching logic to handle both PATCH (edit) and POST (new) 
-    //! touch all values when editing so state is updated, setState if isEditing is true to the props, OR (**prob best solution**) pass only updated values to rails to update
+
     const handleSubmitHelper = (e) => {
         e.preventDefault();
-        props.submitHandler(entry);
+        if (props.isEditing) {
+            props.submitHandler(entry);
+        } else {
+            props.submitHandler(entry, false)
+        }
         props.history.push('/journal')
     }
+    
     const handleNewJournalEntryChange = (e) => {
+        console.log("handle update ", e)
         const { name, value } = e.target;
         setEntry(prevState => ({
             ...prevState,
@@ -19,10 +25,18 @@ const JournalEntryForm = props => {
         }));
     };
 
+    useEffect(() => {
+        if (props.isEditing) {
+            setEntry(props.isEditing)
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
 
     return (
         <>
-            <h2>New Entry</h2>
+            <h2>Entry Form</h2>
             <form onSubmit={handleSubmitHelper}>
 
                 <div className="form-dropdown">
@@ -36,10 +50,10 @@ const JournalEntryForm = props => {
                 </div>
                 {/* <input type="text" name="beach_id" placeholder="Beach" value={entry.beach} onChange={handleNewJournalEntryChange} /> */}
 
-                <input type="text" name="entry" placeholder="Notes" value={props.isEditing ? props.isEditing.entry : entry.entry} onChange={handleNewJournalEntryChange} />
-                <input type="text" name="session_start_time" placeholder="Start Time" value={props.isEditing ? props.isEditing.session_start_time : entry.session_start_time} onChange={handleNewJournalEntryChange} />
-                <input type="text" name="session_duration" placeholder="Session Duration" value={props.isEditing ? props.isEditing.session_duration : entry.session_duration} onChange={handleNewJournalEntryChange} />
-                <input type="text" name="wave_quality" placeholder="Wave Quality" value={props.isEditing ? props.isEditing.wave_quality : entry.wave_quality} onChange={handleNewJournalEntryChange} />
+                <input type="text" name="entry" placeholder="Notes" value={entry.entry} onChange={handleNewJournalEntryChange} />
+                <input type="text" name="session_start_time" placeholder="Start Time" value={entry.session_start_time} onChange={handleNewJournalEntryChange} />
+                <input type="text" name="session_duration" placeholder="Session Duration" value={entry.session_duration} onChange={handleNewJournalEntryChange} />
+                <input type="text" name="wave_quality" placeholder="Wave Quality" value={entry.wave_quality} onChange={handleNewJournalEntryChange} />
 
                 <input type="submit" />
             </form>

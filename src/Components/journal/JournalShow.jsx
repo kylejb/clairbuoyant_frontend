@@ -10,7 +10,7 @@ const JournalShow = props => {
         props.deleteHandler(entry);
         props.history.push('/journal');
     }
-    
+
     const renderPage = () => {
         if (entry) {
             return (
@@ -18,7 +18,7 @@ const JournalShow = props => {
                     <h1>{entry.session_start_time}</h1>
                     <p>{entry.entry}</p>
                     <button onClick={ () => setIsEditing(!isEditing)}>EDIT</button>
-                    {isEditing ? <JournalEntryForm isEditing={entry} updateHandler={props.updateHandler} /> : null}
+                    {isEditing ? <JournalEntryForm isEditing={entry} submitHandler={props.submitHandler} /> : null}
                     <button onClick={handleDelete}>DELETE</button>
                 </> 
             );
@@ -26,6 +26,8 @@ const JournalShow = props => {
             return null
         }
     }    
+
+    
     return renderPage();
 }
 

@@ -11,6 +11,12 @@ const JournalContainer = props => {
     const currentUser = JSON.parse(localStorage.getItem('loggedIn'));
 
 
+    // cleanEmpty() sourced from 'https://stackoverflow.com/a/57625661'
+    const cleanEmpty = obj => Object.entries(obj)
+        .map(([k,v])=>[k,v && typeof v === "object" ? cleanEmpty(v) : v])
+        .reduce((a,[k,v]) => (v == null ? a : (a[k]=v, a)), {});
+
+
     const createNewEntry = (entry) => {
         console.log("createNew ", entry)
         const options = {
@@ -41,6 +47,21 @@ const JournalContainer = props => {
         }
         // Refactor this expensive re-rendering; temp for MVP 
         fetch(`http://localhost:3000/api/v1/entries/${entryId}`, options).then(res=>res.json()).then(() => fetchUserEntries())
+    }
+
+    //? consider beach creation within entry; no separate route
+    const userActionOnEntryFetchWrapper = (entry, isEditing = true) => {
+        switch (isEditing) {
+            case true:
+                const cleanedEntry = cleanEmpty(entry)
+                updateEntry(cleanedEntry)
+                break;
+            case false:
+                createNewEntry(entry)
+                break;
+            default:
+                break;
+        }
     }
 
     const fetchUserEntries = () => {
@@ -74,8 +95,8 @@ const JournalContainer = props => {
     
     return (
         <>
-            <Route path={`/journal/:entryId`} render={routerProps => <JournalShow {...routerProps} entries={userEntries} updateHandler={updateEntry} deleteHandler={handleDelete}/>} />
-            <Route exact path='/journal/new' render={ routerProps => <JournalEntryForm {...routerProps} submitHandler={createNewEntry} />} />
+            <Route path={`/journal/:entryId`} render={routerProps => <JournalShow {...routerProps} entries={userEntries} submitHandler={userActionOnEntryFetchWrapper} deleteHandler={handleDelete}/>} />
+            <Route exact path='/journal/new' render={ routerProps => <JournalEntryForm {...routerProps} submitHandler={userActionOnEntryFetchWrapper} />} />
             <Route exact path='/journal' render={(routerProps) => <JournalList {...routerProps} entries={userEntries} />} />           
         </>
     );
