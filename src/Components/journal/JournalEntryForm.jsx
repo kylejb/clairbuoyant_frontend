@@ -19,7 +19,6 @@ const JournalEntryForm = props => {
         }));
     };
 
-    console.log("New Journal Render; state: ", entry)
 
     return (
         <>
