@@ -29,36 +29,38 @@ const Header = props => {
 
     return (
             <Menu fixed='top' stackable inverted>
-            <Menu.Item as='a' header>
-                <Image size='mini' src='/logo.png' style={{ marginRight: '1.5em' }} />
-                Sea State
-            </Menu.Item>
-            <Menu.Item as={Link} to='/home'>Home</Menu.Item>
-            <Dropdown item simple text='Forecasts'>
-            <Dropdown.Menu>
-                 <Dropdown.Item>
-                    <i className='dropdown icon' />
-                    <span className='text'>Surf Log</span>
-                <Dropdown.Menu>
-                    <Dropdown.Item as={Link} to='/journal/new'>New Entry</Dropdown.Item>
-                    <Dropdown.Item as={Link} to='/journal'>All Entries</Dropdown.Item>
-                </Dropdown.Menu>
-                </Dropdown.Item>
-                <Dropdown.Item as={Link} to='/map'>2D Map View</Dropdown.Item>
-                <Dropdown.Item>Favorites</Dropdown.Item>
-                <Dropdown.Divider />
-                <Dropdown.Header>Regions</Dropdown.Header>
-                <Dropdown.Item>
-                    <i className='dropdown icon' />
-                    <span className='text'>USA</span>
+                <Container>
+                    <Menu.Item as='a' header>
+                    <Image size='mini' src='/logo.png' style={{ marginRight: '1.5em' }} />
+                    the Beach Buoys!
+                    </Menu.Item>
+                    <Menu.Item as={Link} to='/home'>Home</Menu.Item>
+                    <Dropdown item simple text='Forecasts'>
                     <Dropdown.Menu>
-                        {parseUSANamedBeaches()}
+                        <Dropdown.Item>
+                            <i className='dropdown icon' />
+                            <span className='text'>Surf Log</span>
+                        <Dropdown.Menu>
+                            <Dropdown.Item as={Link} to='/journal/new'>New Entry</Dropdown.Item>
+                            <Dropdown.Item as={Link} to='/journal'>All Entries</Dropdown.Item>
+                        </Dropdown.Menu>
+                        </Dropdown.Item>
+                        <Dropdown.Item as={Link} to='/map'>2D Map View</Dropdown.Item>
+                        <Dropdown.Item>Favorites</Dropdown.Item>
+                        <Dropdown.Divider />
+                        <Dropdown.Header>Regions</Dropdown.Header>
+                        <Dropdown.Item>
+                            <i className='dropdown icon' />
+                            <span className='text'>USA</span>
+                            <Dropdown.Menu>
+                                {parseUSANamedBeaches()}
+                            </Dropdown.Menu>
+                        </Dropdown.Item>
                     </Dropdown.Menu>
-                </Dropdown.Item>
-            </Dropdown.Menu>
-            </Dropdown>     
-            <Menu.Item as={Link} to='/login'>Sign-in</Menu.Item>
-            <Menu.Item> <HeaderSearch beaches={namedBeaches} selectedBeachHelper={props.selectedBeachHelper}/> </Menu.Item>
+                    </Dropdown>     
+                    <Menu.Item as={Link} to='/login'>Sign-in</Menu.Item>
+                    <Menu.Item> <HeaderSearch beaches={namedBeaches} selectedBeachHelper={props.selectedBeachHelper}/> </Menu.Item>
+                </Container>
             </Menu>
     );
 }
