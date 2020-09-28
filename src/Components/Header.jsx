@@ -7,7 +7,6 @@ const Header = props => {
     const [namedBeaches, setNamedBeaches] = useState([]);
     // const currentUser = JSON.parse(localStorage.getItem('loggedIn'));
 
-    // { name: "", latitude: null, longitude: null }
     const getNamedBeaches = async () => {
         const response = await fetch('http://localhost:3000/api/v1/beaches');
         let data = await response.json();
@@ -49,13 +48,13 @@ const Header = props => {
                         {parseUSANamedBeaches()}
                     </Dropdown.Menu>
                 </Dropdown.Item>
-                <Dropdown.Item>
+                {/* <Dropdown.Item>
                     <i className='dropdown icon' />
                     <span className='text'>Canada</span>
                 <Dropdown.Menu>
                     <Dropdown.Item as={Link} to='/forecast/tofino'>Tofino, BC</Dropdown.Item>
                 </Dropdown.Menu>
-                </Dropdown.Item>
+                </Dropdown.Item> */}
             </Dropdown.Menu>
             </Dropdown>     
             <Menu.Item as={Link} to='/login'>Sign-in</Menu.Item>
