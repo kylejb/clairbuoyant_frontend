@@ -16,6 +16,10 @@ const WorldMap = props => {
 
 
     return (
+        /* 
+        Map's center prop can be revised to accept prop its parent (MapContainer), which may originate from user's onClick action to set map's starting location 
+            ? e.g., clicking a position on the 3d globe will load a 2d map of that area for more detailed information 
+        */
         <Map center={[40.586723, -73.811501]} zoom={12}>
             <TileLayer
                 url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
