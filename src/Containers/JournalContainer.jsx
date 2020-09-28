@@ -65,7 +65,9 @@ const JournalContainer = props => {
     }
 
     useEffect(() => {
-        fetchUserEntries()
+        fetchUserEntries();
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     
@@ -80,3 +82,5 @@ const JournalContainer = props => {
 }
 
 export default JournalContainer;
+
+// select dropdown defaulValue + disabled for dropdown form
