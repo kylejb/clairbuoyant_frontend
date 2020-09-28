@@ -49,7 +49,7 @@ const MapContainer = () => {
 
     
     return (
-        <Segment fluid style={{marginTop: '72px', maxHeight: '50px'}}>
+        <Segment fluid='true' style={{marginTop: '72px', maxHeight: '50px'}}>
             <WorldMap buoys={buoys} />
         </Segment>
     );
