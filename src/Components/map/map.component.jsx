@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Map, Marker, Popup, TileLayer, CircleMarker } from 'react-leaflet';
-import { Icon } from 'leaflet';
-// import './map.css';
+import React, { useState } from 'react';
+import Search from './search.component';
+import { Map, Popup, TileLayer, CircleMarker } from 'react-leaflet';
+// import { Icon } from 'leaflet';
 
 const WorldMap = props => {
     const [selectedBuoy, setSelectedBuoy] = useState(null);
@@ -14,7 +14,7 @@ const WorldMap = props => {
         )
     }
 
-    console.log("WorldMap Render ", props)
+
     return (
         <Map center={[40.586723, -73.811501]} zoom={12}>
             <TileLayer
@@ -35,6 +35,9 @@ const WorldMap = props => {
                     }} 
                 />
                 ))}
+
+                <Search />
+
                 { selectedBuoy && (
                     <Popup
                         position={[
