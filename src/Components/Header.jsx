@@ -36,7 +36,15 @@ const Header = props => {
             <Menu.Item as={Link} to='/home'>Home</Menu.Item>
             <Dropdown item simple text='Forecasts'>
             <Dropdown.Menu>
-                <Dropdown.Item as={Link} to='/journal'>Surf Log</Dropdown.Item>
+                 <Dropdown.Item>
+                    <i className='dropdown icon' />
+                    <span className='text'>Surf Log</span>
+                <Dropdown.Menu>
+                    <Dropdown.Item as={Link} to='/journal/new'>New Entry</Dropdown.Item>
+                    <Dropdown.Item as={Link} to='/journal'>All Entries</Dropdown.Item>
+                </Dropdown.Menu>
+                </Dropdown.Item>
+                <Dropdown.Item as={Link} to='/map'>2D Map View</Dropdown.Item>
                 <Dropdown.Item>Favorites</Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Header>Regions</Dropdown.Header>
@@ -47,13 +55,6 @@ const Header = props => {
                         {parseUSANamedBeaches()}
                     </Dropdown.Menu>
                 </Dropdown.Item>
-                {/* <Dropdown.Item>
-                    <i className='dropdown icon' />
-                    <span className='text'>Canada</span>
-                <Dropdown.Menu>
-                    <Dropdown.Item as={Link} to='/forecast/tofino'>Tofino, BC</Dropdown.Item>
-                </Dropdown.Menu>
-                </Dropdown.Item> */}
             </Dropdown.Menu>
             </Dropdown>     
             <Menu.Item as={Link} to='/login'>Sign-in</Menu.Item>
