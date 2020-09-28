@@ -1,12 +1,13 @@
 import React, { useState, useEffect }from 'react';
-import { Route, Link } from 'react-router-dom';
-import NewJournalEntry from '../Components/journal/NewJournalEntry';
+import { Route } from 'react-router-dom';
+import JournalEntryForm from '../Components/journal/JournalEntryForm';
 import JournalShow from '../Components/journal/JournalShow';
 
 import JournalList from '../Components/journal/JournalList';
 
 const JournalContainer = props => {
     const [userEntries, setUserEntries] = useState([]);
+    
     const currentUser = JSON.parse(localStorage.getItem('loggedIn'));
 
 
@@ -73,14 +74,12 @@ const JournalContainer = props => {
     
     return (
         <>
-            <Link to='/journal/new'>NEW</Link>
             <Route path={`/journal/:entryId`} render={routerProps => <JournalShow {...routerProps} entries={userEntries} updateHandler={updateEntry} deleteHandler={handleDelete}/>} />
-            <Route exact path='/journal/new' render={ routerProps => <NewJournalEntry {...routerProps} submitHandler={createNewEntry} />} />
-            <Route exact path='/journal' render={(routerProps) => <JournalList {...routerProps} entries={userEntries} />} />
+            <Route exact path='/journal/new' render={ routerProps => <JournalEntryForm {...routerProps} submitHandler={createNewEntry} />} />
+            <Route exact path='/journal' render={(routerProps) => <JournalList {...routerProps} entries={userEntries} />} />           
         </>
     );
 }
 
 export default JournalContainer;
 
-// select dropdown defaulValue + disabled for dropdown form
