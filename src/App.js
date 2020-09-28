@@ -6,13 +6,13 @@ import MapContainer from './Containers/MapContainer';
 import StaticLayout from './Components/StaticLayout';
 // import styled from 'styled-components';
 // import Footer from './Components/Footer'
-// import ForecastGlobe from './Components/worldmap/Globe';
+import ForecastGlobe from './Components/worldmap/Globe';
 
 
 
 const App = () => {
-  const [selectedBeach, setSelectedBeach] = useState(null),
-        [currentUserToken, setCurrentUserToken] = useState(null);
+  const [selectedBeach, setSelectedBeach] = useState(null);
+        // [currentUserToken, setCurrentUserToken] = useState(null);
   
   const selectedBeachHelper = (beachObj) => {
     setSelectedBeach(beachObj)
@@ -21,10 +21,11 @@ const App = () => {
 
   return (
     <> 
-      <Route path="/" render={ ( routerProps ) => <Header {...routerProps} selectedBeachHelper={selectedBeachHelper} userToken={currentUserToken} />} />
-      <MapContainer /> 
-      {/* <Route exact path="/home" component={ForecastGlobe} /> */}
-      {/* <StaticLayout beach={selectedBeach} userToken={currentUserToken} /> */}
+      <Route exact path="/map" component={MapContainer} />
+
+      <Route path="/" render={ ( routerProps ) => <Header {...routerProps} selectedBeachHelper={selectedBeachHelper} />} />
+      <Route exact path="/home" component={ForecastGlobe} />
+      <StaticLayout beach={selectedBeach} />
       {/* <Footer /> */}
       {/* <Route exact path="/login" render={() => <LoginForm setToken={setCurrentUserToken}/>} /> */}
     </>
