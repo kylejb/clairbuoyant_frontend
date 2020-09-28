@@ -2,10 +2,9 @@ import React, {useState, useEffect, useRef} from 'react';
 import Globe from 'react-globe.gl';
 
 
-const ForecastGlobe = () => {
-    const [buoys, setBuoys] = useState([]), 
-        globeEl = useRef(),
-        currentUser = JSON.parse(localStorage.getItem('loggedIn'));
+const ForecastGlobe = ({buoys}) => {
+    const globeEl = useRef();
+    // const currentUser = JSON.parse(localStorage.getItem('loggedIn'));
 
     
     const parseBuoyData = (buoyObjArr) => {
@@ -15,30 +14,9 @@ const ForecastGlobe = () => {
             newBuoyObj.name = buoy.station_name; newBuoyObj.coordinates = coordinates; newBuoyObj.station_code = stationCode; newBuoyObj.id = buoy.id;
             parsedBuoyObjArr.push(newBuoyObj);
         }
-        setBuoys(parsedBuoyObjArr);
+        return parsedBuoyObjArr;
     }
-
-    const fetchBuoys = async () => {
-        const options = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Authorization': `Bearer ${currentUser}`
-            }
-        };
-
-        const response = await fetch("http://localhost:3000/api/v1/buoys", options);
-        let buoys = await response.json();
-        parseBuoyData(buoys);
-    }
-
-    useEffect(() => {
-        fetchBuoys();
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
+    
 
     return (
         <>
@@ -46,8 +24,8 @@ const ForecastGlobe = () => {
                     ref={globeEl}
                     globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
                     labelsData={buoys}
-                    labelLat={d => d.coordinates[0]}
-                    labelLng={d => d.coordinates[1]}
+                    labelLat={d => d.latitude}
+                    labelLng={d => d.longitude}
                     labelText={d =>"Buoy"}
                     labelSize={0 * 4e-4}
                     labelDotRadius={300 * 4e-4}

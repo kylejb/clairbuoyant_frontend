@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Segment } from 'semantic-ui-react';
 
 import WorldMap from '../Components/map/map.component';
+import ForecastGlobe from '../Components/worldmap/Globe';
+
 import './map.css';
 
 
@@ -51,6 +53,7 @@ const MapContainer = () => {
     return ( 
         <Segment padded={false} tertiary fluid='true' style={{marginTop: '72px'}}>
             <WorldMap buoys={buoys} />
+            {/* <ForecastGlobe buoys={buoys} /> */}
         </Segment>
     );
 }
