@@ -22,9 +22,9 @@ const WorldMap = props => {
         */
         <Map center={[40.586723, -73.811501]} zoom={12}>
             <TileLayer
-                url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
+                url='https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}'
                 maxZoom={17}
-                attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+                attribution='Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri'
             />
             { props.buoys.map( buoy => (
                 <CircleMarker 
