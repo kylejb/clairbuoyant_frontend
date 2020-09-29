@@ -10,6 +10,7 @@ import StaticLayout from './Components/StaticLayout';
 
 const App = () => {
   const [selectedBeach, setSelectedBeach] = useState(null),
+        // eslint-disable-next-line
         [currentUserToken, setCurrentUserToken] = useState(null);
   
   const selectedBeachHelper = (beachObj) => {

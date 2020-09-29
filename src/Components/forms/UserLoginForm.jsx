@@ -19,7 +19,6 @@ const UserLoginForm = props => {
             // localStorage for MVP only
             localStorage.setItem("loggedIn", JSON.stringify(user.jwt));
             props.setToken(user.jwt);
-
         })
     }
 
