@@ -13,9 +13,11 @@ import './map.css';
 
 
 const MapContainer = () => {
-    const [buoys, setBuoys] = useState([]);
+    const [buoys, setBuoys] = useState([]),
+          [favBuoys, setFavBuoys] = useState([]);
         // [selectedBuoy, setSelectedBuoy] = useState(null);
-    // currentUser = JSON.parse(localStorage.getItem('loggedIn'));
+
+    const currentUser = JSON.parse(localStorage.getItem('loggedIn'));
 
 
     const parseBuoyData = (buoyObjArr) => {
@@ -34,7 +36,6 @@ const MapContainer = () => {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
-                // 'Authorization': `Bearer ${currentUser}`
             }
         };
         const response = await fetch("http://localhost:3000/api/v1/buoys", options);
@@ -42,8 +43,46 @@ const MapContainer = () => {
         parseBuoyData(buoys);
     }
 
+    const fetchUserFavBuoys = async () => {
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${currentUser}`
+            }
+        };
+        const response = await fetch("http://localhost:3000/api/v1/favorite_buoys", options);
+        let buoys = await response.json();
+        setFavBuoys(buoys);
+    }
+
+    const handleUserFavorites = async (buoyObj, isFavorited) => {
+        console.log("handle user favorites ", buoyObj, isFavorited)
+
+        // const options = {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Accept': 'application/json',
+        //         'Authorization': `Bearer ${currentUser}`
+        //     },
+        //     body: JSON.stringify(buoyObj)
+        // };
+        // const response = await fetch("http://localhost:3000/api/v1/favorite_buoys", options);
+        // let buoys = await response.json();
+        // setFavBuoys(prevState => ({
+        //     ...prevState,
+        //     buoys
+        // }));
+    }
+
     useEffect(() => {
         fetchBuoys();
+
+        if (currentUser) {
+            fetchUserFavBuoys()
+        }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -51,7 +90,7 @@ const MapContainer = () => {
     
     return ( 
         <Segment padded={false} tertiary fluid='true' style={{marginTop: '72px'}}>
-            <WorldMap buoys={buoys} />
+            <WorldMap buoys={buoys} favBuoys={favBuoys} handleUserFavorites={handleUserFavorites} />
         </Segment>
     );
 }

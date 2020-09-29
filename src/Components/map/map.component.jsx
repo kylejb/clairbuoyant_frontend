@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Search from './search.component';
-import ForecastCard from '../forecast/ForecastCard';
-import JournalCard from '../journal/JournalCard';
+import BuoyCard from '../buoy/BuoyCard';
+// import ForecastCard from '../forecast/ForecastCard';
+// import JournalCard from '../journal/JournalCard';
 import { Map, Popup, TileLayer, CircleMarker } from 'react-leaflet';
 // import { Icon } from 'leaflet';
 
@@ -30,7 +31,7 @@ const WorldMap = props => {
         <Map center={[40.586723, -73.811501]} zoom={12}>
             <TileLayer
                 url='https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}'
-                maxZoom={17}
+                maxZoom={13}
                 attribution='Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri'
             />
 
@@ -43,43 +44,27 @@ const WorldMap = props => {
                     ]}
                     radius={8}
                     onClick={ () => {
-                        fetchBuoyShow(buoy)
+                        fetchBuoyShow(buoy);
                     }} 
                 />
             ))}
 
-                <Search />
+            <Search />
 
-                { selectedBuoy && (
-                    <Popup
-                        position={[
-                            selectedBuoy.latitude,
-                            selectedBuoy.longitude
-                        ]}
-                        onClose={() => {
-                            setSelectedBuoy(null)
-                        }}
-                    >
-                        <div>
-                            <h2>{selectedBuoy.station_name}</h2>
-                            {/*// TODO - wire up behavior for user to favorite buoy; this should also change color of buoy */}
-                            <button onClick={ () => console.log("Toggle FavBuoy Here")}>Favorite</button>
-                            { selectedBuoyMetData && (
-                                <>
-                                    {<ForecastCard selectedBuoyMetData={selectedBuoyMetData} />}
-                                </>
-                            )}
-
-                            { selectedBuoy.entries && (
-                                <>   
-                                    {<JournalCard selectedBuoy={selectedBuoy} />}
-                                </>
-                            )}
-
-                            <p>{selectedBuoy.longitude}, {selectedBuoy.latitude}</p>
-                        </div>
-                    </Popup>
-                )}
+            { selectedBuoy && (
+                <Popup
+                    position={[
+                        selectedBuoy.latitude,
+                        selectedBuoy.longitude
+                    ]}
+                    onClose={() => {
+                        setSelectedBuoy(null);
+                    }}
+                >
+                    
+                    <BuoyCard selectedBuoy={selectedBuoy} selectedBuoyMetData={selectedBuoyMetData} handleUserFavorites={props.handleUserFavorites} />
+                </Popup>
+            )}
         </Map>
     );
 }

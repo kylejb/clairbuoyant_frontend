@@ -1,5 +1,6 @@
-import React from 'react'
-import { Feed } from 'semantic-ui-react'
+import React from 'react';
+import { Feed } from 'semantic-ui-react';
+
 
 const ForecastCardPart = ({ metData }) => {
     const date1 = new Date(metData.recorded_data_at),
@@ -12,11 +13,19 @@ const ForecastCardPart = ({ metData }) => {
         <>
             <Feed>
                 <Feed.Event>
-                <Feed.Label image='/images/avatar/small/jenny.jpg' />
                 <Feed.Content>
                     <Feed.Date content={`${diffDays} day(s) ago`}/>
                     <Feed.Summary>
-                         <p>{metData.wind_dir}</p>       
+                        <p>Wind Direction: {metData.wind_dir}</p>
+                        <p>Wind Speed: {metData.wind_speed}</p>
+                        <p>Wind Gust: {metData.wind_gust}</p>
+                        <p>Wave Height: {metData.wave_height}</p>
+                        <p>Wave Period: {metData.dom_wave_period}</p>
+                        <p>Avg Wave Period: {metData.avg_wave_period}</p>
+                        <p>Wave Direction: {metData.wave_dir}</p>
+                        <p>Sea Pressure: {metData.sea_pressure}</p>
+                        <p>Air Temp: {metData.air_temp}</p>
+                        <p>Sea Temp: {metData.sea_temp}</p>      
                     </Feed.Summary>
                 </Feed.Content>
                 </Feed.Event>
@@ -27,3 +36,4 @@ const ForecastCardPart = ({ metData }) => {
 }
 
 export default ForecastCardPart;
+
