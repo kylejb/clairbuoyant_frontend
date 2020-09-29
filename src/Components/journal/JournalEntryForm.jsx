@@ -11,11 +11,11 @@ const JournalEntryForm = props => {
         if (props.isEditing) {
             props.submitHandler(entry);
         } else {
-            props.submitHandler(entry, false)
+            props.submitHandler(entry, false);
         }
-        props.history.push('/journal')
+        props.history.push('/journal');
     }
-    
+
     const handleNewJournalEntryChange = (e) => {
         console.log("handle update ", e)
         const { name, value } = e.target;
