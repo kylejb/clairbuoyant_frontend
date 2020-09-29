@@ -1,19 +1,22 @@
 import React from 'react'
 import { Feed } from 'semantic-ui-react'
 
-const ForecastCardPart = props => {
-
+const ForecastCardPart = ({ metData }) => {
+    const date1 = new Date(metData.recorded_data_at),
+          date2 = Date.now(),
+          timeDiff = Math.abs(date2 - date1.getTime()),
+          diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
     
-    console.log("forecastpart render ", props)
+
     return (
         <>
             <Feed>
                 <Feed.Event>
                 <Feed.Label image='/images/avatar/small/jenny.jpg' />
                 <Feed.Content>
-                    <Feed.Date content='1 day ago' />
+                    <Feed.Date content={`${diffDays} day(s) ago`}/>
                     <Feed.Summary>
-                    You added <a>Jenny Hess</a> to your <a>coworker</a> group.
+                         <p>{metData.wind_dir}</p>       
                     </Feed.Summary>
                 </Feed.Content>
                 </Feed.Event>
