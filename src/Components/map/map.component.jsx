@@ -1,29 +1,31 @@
 import React, { useState } from 'react';
 import Search from './search.component';
+import ForecastCard from '../forecast/ForecastCard';
+import JournalCard from '../journal/JournalCard';
 import { Map, Popup, TileLayer, CircleMarker } from 'react-leaflet';
 // import { Icon } from 'leaflet';
 
+
 const WorldMap = props => {
-    const [selectedBuoy, setSelectedBuoy] = useState(null);
+    const [selectedBuoy, setSelectedBuoy] = useState(null),
+          [selectedBuoyMetData, setSelectedBuoyMetData] = useState(null);
 
     const fetchBuoyShow = (buoyObj) => {
-        console.log("start of fetch show ", buoyObj)
         fetch(`http://localhost:3000/api/v1/buoys/${buoyObj.id}`)
         .then(res => res.json())
-        .then(buoyResObj => setSelectedBuoy(buoyResObj)
-        )
-    }
+        .then(buoyResObj => {
+            setSelectedBuoy(buoyResObj)
+        })
 
-    const renderBuoyEntries = () => {
-        return selectedBuoy.entries.map(selectedBuoyEntry => <li key={selectedBuoyEntry.id}> {selectedBuoyEntry.entry} </li>)
+        fetch(`http://localhost:3000/api/v1/buoys/${buoyObj.id}/meteorological_data`)
+        .then(res => res.json())
+        .then(buoyResObj => {
+            setSelectedBuoyMetData(buoyResObj)
+        })
     }
 
 
     return (
-        /* 
-        Map's center prop can be revised to accept prop its parent (MapContainer), which may originate from user's onClick action to set map's starting location 
-            ? e.g., clicking a position on the 3d globe will load a 2d map of that area for more detailed information 
-        */
         <Map center={[40.586723, -73.811501]} zoom={12}>
             <TileLayer
                 url='https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}'
@@ -58,13 +60,19 @@ const WorldMap = props => {
                     >
                         <div>
                             <h2>{selectedBuoy.station_name}</h2>
-                            { selectedBuoy.entries && (
-                                <div>
-                                    <ul>
-                                    {renderBuoyEntries()}
-                                    </ul>
-                                </div>
+
+                            { selectedBuoyMetData && (
+                                <>
+                                    {<ForecastCard selectedBuoyMetData={selectedBuoyMetData} />}
+                                </>
                             )}
+
+                            { selectedBuoy.entries && (
+                                <>   
+                                    {<JournalCard selectedBuoy={selectedBuoy} />}
+                                </>
+                            )}
+
                             <p>{selectedBuoy.longitude}, {selectedBuoy.latitude}</p>
                         </div>
                     </Popup>
