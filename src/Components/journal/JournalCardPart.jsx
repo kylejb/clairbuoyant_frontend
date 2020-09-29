@@ -1,5 +1,6 @@
-import React from 'react'
-import { Feed } from 'semantic-ui-react'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Feed } from 'semantic-ui-react';
 
 const JournalCardPart = ({ entry }) => {
     const date1 = new Date(entry.session_start_time),
@@ -12,7 +13,7 @@ const JournalCardPart = ({ entry }) => {
         <>
             <Feed>
                 <Feed.Event>
-                <Feed.Label image='/images/avatar/small/jenny.jpg' />
+                <Feed.Label icon='book' as={Link} to={`/journal/${entry.id}`} target='_blank' />
                 <Feed.Content>
                     <Feed.Date content={`${diffDays} day(s) ago`}/>
                     <Feed.Summary>

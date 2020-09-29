@@ -15,7 +15,7 @@ const JournalCard = props => {
   return (
     <Card>
       <Card.Content>
-        <Card.Header>Recent Activity</Card.Header>
+        <Card.Header>Your Activity</Card.Header>
         <p>Added {props.selectedBuoy.entries.length} entries</p>       
       </Card.Content>
       <Card.Content>
