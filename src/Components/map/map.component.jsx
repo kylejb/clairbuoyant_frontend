@@ -10,6 +10,7 @@ const WorldMap = props => {
     const [selectedBuoy, setSelectedBuoy] = useState(null),
           [selectedBuoyMetData, setSelectedBuoyMetData] = useState(null);
 
+    // refactor to async/await - should load data faster
     const fetchBuoyShow = (buoyObj) => {
         fetch(`http://localhost:3000/api/v1/buoys/${buoyObj.id}`)
         .then(res => res.json())
@@ -32,6 +33,7 @@ const WorldMap = props => {
                 maxZoom={17}
                 attribution='Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri'
             />
+
             { props.buoys.map( buoy => (
                 <CircleMarker 
                     key={buoy.station_code} 
@@ -44,7 +46,7 @@ const WorldMap = props => {
                         fetchBuoyShow(buoy)
                     }} 
                 />
-                ))}
+            ))}
 
                 <Search />
 
@@ -60,7 +62,8 @@ const WorldMap = props => {
                     >
                         <div>
                             <h2>{selectedBuoy.station_name}</h2>
-
+                            {/*// TODO - wire up behavior for user to favorite buoy; this should also change color of buoy */}
+                            <button onClick={ () => console.log("Toggle FavBuoy Here")}>Favorite</button>
                             { selectedBuoyMetData && (
                                 <>
                                     {<ForecastCard selectedBuoyMetData={selectedBuoyMetData} />}
