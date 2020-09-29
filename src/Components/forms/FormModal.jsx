@@ -1,15 +1,16 @@
 import React from 'react'
-import { Button, Header, Image, Modal } from 'semantic-ui-react'
+import { Button, Icon, Header, Image, Modal } from 'semantic-ui-react'
 
-const FormModal = () => {
+const FormModal = (props) => {
   const [open, setOpen] = React.useState(false)
 
+  console.log("FormModal ", props)
   return (
     <Modal
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
       open={open}
-      trigger={<Button>Show Modal</Button>}
+      trigger={(props.entry && <Icon name='book'></Icon>) || <Button>New Entry</Button>}
     >
       <Modal.Header>Select a Photo</Modal.Header>
       <Modal.Content image>
