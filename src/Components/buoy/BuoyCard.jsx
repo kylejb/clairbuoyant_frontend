@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import FormModal from '../forms/FormModal';
 import { Button, Container } from 'semantic-ui-react';
 import ForecastCard from '../forecast/ForecastCard';
 import JournalCard from '../journal/JournalCard';
@@ -36,8 +36,7 @@ const BuoyCard = props => {
                     {renderFavButtonTextonToggle()}
                 </Button>
 
-                <Button as={Link} to='/journal/new'>
-                    New Entry
+                <Button as={()=>FormModal(props.selectedBuoy)}>                    
                 </Button>
 
                 { props.selectedBuoyMetData && (

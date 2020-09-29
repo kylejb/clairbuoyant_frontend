@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import FormModal from '../forms/FormModal';
 import { Feed } from 'semantic-ui-react';
 
 const JournalCardPart = ({ entry }) => {
@@ -13,7 +13,8 @@ const JournalCardPart = ({ entry }) => {
         <>
             <Feed>
                 <Feed.Event>
-                <Feed.Label icon='book' as={Link} to={`/journal/${entry.id}`} target='_blank' />
+                <Feed.Label icon='book' />
+                <Feed.Label as={() => FormModal( entry )} />
                 <Feed.Content>
                     <Feed.Date content={`${diffDays} day(s) ago`}/>
                     <Feed.Summary>
