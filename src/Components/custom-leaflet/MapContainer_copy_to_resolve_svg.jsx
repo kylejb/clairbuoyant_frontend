@@ -148,7 +148,6 @@ export default MapContainer;
 //         fetchBuoys()
 //     }, [])
 
-//     console.log("MapContainer ", buoys)
 //     return (
 //         <Map center={[40.586723, -73.811501]} zoom={12}>
 //             <TileLayer
