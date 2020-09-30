@@ -3,27 +3,26 @@ import { Card } from 'semantic-ui-react';
 import JournalCardPart from './JournalCardPart';
 
 const JournalCard = props => {
-  const [patchEntryToOptimisticRerender, setPatchEntryToOptimisticRerender] = React.useState(null);
+  const [patchEntryToOptimisticRerender, setPatchEntryToOptimisticRerender] = React.useState(null),
+    [postEntryToOptimisticRerender, setPostEntryToOptimisticRerender] = React.useState(null)
 
   const journalCardStateWrapper = (patchEntryObj) => {
     setPatchEntryToOptimisticRerender(patchEntryObj)
   }
 
   const renderJournalCardEntriesFeed = () => {
-    console.log("render thing state ", patchEntryToOptimisticRerender)
-
     return props.selectedBuoy.entries.map(entry => {
-      // PATCH (optimistic re-render)
       if (patchEntryToOptimisticRerender && patchEntryToOptimisticRerender.id === entry.id) {
-        console.log("PATCH RENDER", patchEntryToOptimisticRerender)
         return <JournalCardPart key={patchEntryToOptimisticRerender.id} entry={patchEntryToOptimisticRerender} entrySubmitHandler={props.entrySubmitHandler} entryRerenderHandler={journalCardStateWrapper}/>
       } else {
-        console.log("ELSE ", !!patchEntryToOptimisticRerender)
         return <JournalCardPart key={entry.id} entry={entry} entrySubmitHandler={props.entrySubmitHandler} entryRerenderHandler={journalCardStateWrapper}/>
-       }
-        // add Link to for routing
+      }
     });
   }
+
+  React.useEffect(() => {
+    setPostEntryToOptimisticRerender(props.newEntry)
+  }, [props.newEntry])
   
   return (
     <Card>
@@ -32,7 +31,10 @@ const JournalCard = props => {
         {/* <p>Added {props.selectedBuoy.entries.length} entries</p>*/}
       </Card.Content>
       <Card.Content>
-       {patchEntryToOptimisticRerender ? renderJournalCardEntriesFeed() : renderJournalCardEntriesFeed()}
+       {renderJournalCardEntriesFeed()}
+        {postEntryToOptimisticRerender && (
+            <JournalCardPart entry={postEntryToOptimisticRerender} entrySubmitHandler={props.entrySubmitHandler} entryRerenderHandler={journalCardStateWrapper}/>
+        )}
       </Card.Content>
 
     </Card>

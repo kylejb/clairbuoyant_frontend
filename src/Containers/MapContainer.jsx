@@ -12,9 +12,26 @@ import './map.css';
 
 const MapContainer = (props) => {
     const [buoys, setBuoys] = useState([]),
-          [favBuoys, setFavBuoys] = useState([]);
+          [favBuoys, setFavBuoys] = useState([]),
+          [selectedBuoy, setSelectedBuoy] = useState(null),
+          [selectedBuoyMetData, setSelectedBuoyMetData] = useState(null);
+          
 
     const currentUser = JSON.parse(localStorage.getItem('loggedIn'));
+
+
+    //* adding behavior to parent's function and passing this down to MapContainer children
+    // review later for race condition issues due to Promises; could be good case study for concept
+    const entrySubmitHandlerHelper = (entry, isEditing = true) => {
+        props.entrySubmitHandler(entry, isEditing);
+        fetchSelectedBuoy(selectedBuoy);
+    }
+
+    const fetchSelectedBuoy = async (buoyObj) => {
+        const response = await fetch(`http://localhost:3000/api/v1/buoys/${buoyObj.id}`)
+        let buoy = await response.json();
+        setSelectedBuoy(buoy);
+    }
 
 
     const parseBuoyData = (buoyObjArr) => {
@@ -105,7 +122,16 @@ const MapContainer = (props) => {
 
     return ( 
         <Segment padded={false} tertiary fluid='true' style={{marginTop: '72px'}}>
-            <WorldMap buoys={buoys} favBuoys={favBuoys} handleUserFavorites={handleUserFavorites} entrySubmitHandler={props.entrySubmitHandler}/>
+            <WorldMap 
+                buoys={buoys} 
+                favBuoys={favBuoys} 
+                handleUserFavorites={handleUserFavorites} 
+                entrySubmitHandler={entrySubmitHandlerHelper}
+                selectedBuoy={selectedBuoy}
+                setSelectedBuoy={setSelectedBuoy}
+                selectedBuoyMetData={selectedBuoyMetData}
+                setSelectedBuoyMetData={setSelectedBuoyMetData}
+            />
         </Segment>
     );
 }

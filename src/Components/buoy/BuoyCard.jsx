@@ -12,7 +12,7 @@ const BuoyCard = props => {
         setPostEntryToOptimisticRerender(postEntryObj)
     }
 
-    console.log("buoyCard ", props)
+
     return (
         <Container>
             <h2>{props.selectedBuoy.station_name}</h2>
@@ -31,7 +31,7 @@ const BuoyCard = props => {
                 )}
 
                 { props.selectedBuoy && (
-                    <JournalCard selectedBuoy={props.selectedBuoy} entrySubmitHandler={props.entrySubmitHandler} /> 
+                    <JournalCard selectedBuoy={props.selectedBuoy} entrySubmitHandler={props.entrySubmitHandler} newEntry={postEntryToOptimisticRerender} /> 
                 )}
                 
                 
