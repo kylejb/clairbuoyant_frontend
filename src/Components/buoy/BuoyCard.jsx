@@ -5,39 +5,25 @@ import ForecastCard from '../forecast/ForecastCard';
 import JournalCard from '../journal/JournalCard';
 
 const BuoyCard = props => {
-    const [isFavClicked, setIsFavClicked] = useState(false);
+    const [isFav, setIsFavClicked] = useState(props.isFav);
 
-    // eslint-disable-next-line
-    const submitFavHandler = (selectedBuoy) => {
-        props.handleUserFavorites(selectedBuoy, isFavClicked)
-    }
-
-    const renderFavButtonTextonToggle = () => {
-        if (isFavClicked) {
-            return "Unfavorite";
-        } else {
-            return "Favorite";
-        }
-    }
-
+    
     useEffect(() => {
-        submitFavHandler(props.selectedBuoy)
+        props.handleUserFavorites(props.selectedBuoy, isFav)
         // eslint-disable-next-line
-    }, [isFavClicked])
-
+    }, [isFav])
 
 
     return (
         <Container>
             <h2>{props.selectedBuoy.station_name}</h2>
                 <Button onClick={ () => {
-                    setIsFavClicked(prevState => !prevState);
+                    setIsFavClicked(!isFav)   
                 }}>
-                    {renderFavButtonTextonToggle()}
+                   {isFav ? "Unfavorite" : "Favorite"}
                 </Button>
 
-                <Button as={()=>FormModal(props.selectedBuoy)}>                    
-                </Button>
+                <Button as={()=> <FormModal selectedBuoy={props.selectedBuoy} />} />                 
 
                 { props.selectedBuoyMetData && (
                     <ForecastCard selectedBuoyMetData={props.selectedBuoyMetData} />
