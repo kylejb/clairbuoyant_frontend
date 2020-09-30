@@ -5,14 +5,7 @@ import ForecastCardPart from './ForecastCardPart';
 
 const ForecastCard = props => {
 
-  // const renderForecastCardEntriesFeed = () => {
-  //   return props.selectedBuoyMetData.map(metData => (
-  //     // add Link to for routing
-  //     <ForecastCardPart key={metData.id} metData={metData} />
-  //   ));
-  // }
   
-
   return (
     <Card>
       <Card.Content>

@@ -18,7 +18,7 @@ const JournalContainer = props => {
 
 
     const createNewEntry = (entry) => {
-        console.log("createNew ", entry)
+        // console.log("createNew ", entry)
         const options = {
             method: 'POST',
             headers: {
@@ -34,7 +34,7 @@ const JournalContainer = props => {
     }
 
     const updateEntry = (entry) => {
-        console.log("updateEntry ", entry)
+        // console.log("updateEntry ", entry)
         const entryId = entry.id
         const options = {
             method: 'PATCH',
