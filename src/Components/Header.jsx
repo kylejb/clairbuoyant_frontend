@@ -5,7 +5,7 @@ import { Container, Dropdown, Image, Menu } from 'semantic-ui-react';
 
 const Header = props => {
     const [namedBeaches, setNamedBeaches] = useState([]);
-    // const currentUser = JSON.parse(localStorage.getItem('loggedIn'));
+    const currentUser = JSON.parse(localStorage.getItem('loggedIn'));
 
     const getNamedBeaches = async () => {
         const response = await fetch('http://localhost:3000/api/v1/beaches');
@@ -59,7 +59,7 @@ const Header = props => {
                     </Dropdown.Item>
                 </Dropdown.Menu>
                 </Dropdown>
-                <Menu.Item as={Link} to='/login'>Sign-in</Menu.Item>
+                {currentUser ? <Menu.Item>Logout</Menu.Item> : <Menu.Item as={Link} to='/login'>Login</Menu.Item>}
                 <Menu.Item> <HeaderSearch beaches={namedBeaches} selectedBeachHelper={props.selectedBeachHelper}/> </Menu.Item>
             </Container>
         </Menu>

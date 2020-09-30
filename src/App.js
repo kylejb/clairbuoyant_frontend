@@ -11,18 +11,38 @@ import StaticLayout from './Components/StaticLayout';
 const App = () => {
   const [selectedBeach, setSelectedBeach] = useState(null),
         // eslint-disable-next-line
-        [currentUserToken, setCurrentUserToken] = useState(null);
+        [currentUser, setCurrentUser] = useState(null);
   
   const selectedBeachHelper = (beachObj) => {
     setSelectedBeach(beachObj)
   }
 
+  const handleUserLogin = async (email, password) => {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({user: {email, password}})
+    }
+    let response = await fetch("http://localhost:3000/api/v1/login", options)
+    let userData = await response.json();
+    setCurrentUser(userData)
+    window.localStorage.setItem("loggedIn", JSON.stringify(userData.jwt));
+  }
+
+  const handleUserLogout = () => {
+    setCurrentUser(false)
+    window.localStorage.removeItem("loggedIn");
+  }
+
 
   return (
     <> 
-      <Route path="/" render={ ( routerProps ) => <Header {...routerProps} selectedBeachHelper={selectedBeachHelper} />} />
+      <Route path="/" render={ ( routerProps ) => <Header {...routerProps} handleUserLogout={handleUserLogout} selectedBeachHelper={selectedBeachHelper} />} />
       <StaticLayout beach={selectedBeach} />
-      <Route exact path="/login" render={() => <LoginForm setToken={setCurrentUserToken}/>} />
+      <Route exact path="/login" render={() => <LoginForm handleUserLogin={handleUserLogin} />} />
       {/* <Footer /> */}
     </>
   );
