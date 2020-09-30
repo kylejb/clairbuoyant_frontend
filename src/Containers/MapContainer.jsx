@@ -10,7 +10,7 @@ import './map.css';
 // });
 
 
-const MapContainer = () => {
+const MapContainer = (props) => {
     const [buoys, setBuoys] = useState([]),
           [favBuoys, setFavBuoys] = useState([]);
 
@@ -105,7 +105,7 @@ const MapContainer = () => {
 
     return ( 
         <Segment padded={false} tertiary fluid='true' style={{marginTop: '72px'}}>
-            <WorldMap buoys={buoys} favBuoys={favBuoys} handleUserFavorites={handleUserFavorites} />
+            <WorldMap buoys={buoys} favBuoys={favBuoys} handleUserFavorites={handleUserFavorites} entrySubmitHandler={props.entrySubmitHandler}/>
         </Segment>
     );
 }
