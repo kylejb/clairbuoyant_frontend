@@ -1,26 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import FormModal from '../forms/FormModal';
-import { Button, Container } from 'semantic-ui-react';
 import ForecastCard from '../forecast/ForecastCard';
 import JournalCard from '../journal/JournalCard';
+import { Button, Container } from 'semantic-ui-react';
 
 const BuoyCard = props => {
-    const [isFav, setIsFavClicked] = useState(props.isFav);
-
+    const [favBtnClicked, setFavBtnClicked] = React.useState(props.isFav);
     
-    useEffect(() => {
-        props.handleUserFavorites(props.selectedBuoy, isFav)
-        // eslint-disable-next-line
-    }, [isFav])
 
 
     return (
         <Container>
             <h2>{props.selectedBuoy.station_name}</h2>
                 <Button onClick={ () => {
-                    setIsFavClicked(!isFav)   
+                    setFavBtnClicked(!favBtnClicked)
+                    props.handleUserFavorites(props.selectedBuoy, !favBtnClicked)
+                    props.toggleIsFav(!favBtnClicked)   
                 }}>
-                   {isFav ? "Unfavorite" : "Favorite"}
+                   {favBtnClicked ? "Unfavorite" : "Favorite"}
                 </Button>
 
                 <Button as={()=> <FormModal selectedBuoy={props.selectedBuoy} />} />                 

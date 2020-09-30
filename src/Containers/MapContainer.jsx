@@ -67,9 +67,7 @@ const MapContainer = () => {
         let response = await fetch("http://localhost:3000/api/v1/favorite_buoys", options);
         let newFavBuoy = await response.json();
 
-    
-        const newObj = [...favBuoys, {...newFavBuoy}]
-      
+        const newObj = [...favBuoys, {...newFavBuoy}];
         setFavBuoys(newObj);
     }
 
@@ -84,6 +82,8 @@ const MapContainer = () => {
         };
         const response = await fetch(`http://localhost:3000/api/v1/favorite_buoys/${buoyObj.id}`, options);
         let confirmation = await response.json();
+        fetchUserFavBuoys();
+        return confirmation
     }
 
     const handleUserFavorites = (buoyObj, isFavorited) => {

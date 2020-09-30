@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import Search from './search.component';
 import BuoyCard from '../buoy/BuoyCard';
-// import ForecastCard from '../forecast/ForecastCard';
-// import JournalCard from '../journal/JournalCard';
 import { Map, Popup, TileLayer, CircleMarker } from 'react-leaflet';
 // import { Icon } from 'leaflet';
 
@@ -10,7 +8,7 @@ import { Map, Popup, TileLayer, CircleMarker } from 'react-leaflet';
 const WorldMap = props => {
     const [selectedBuoy, setSelectedBuoy] = useState(null),
           [selectedBuoyMetData, setSelectedBuoyMetData] = useState(null),
-          [isFavClick, setIsFavClick] = useState(null);
+          [isFav, setIsFav] = useState(null);
 
     // refactor to async/await - should load data faster
     const fetchBuoyShow = async (buoyObj) => {
@@ -35,11 +33,10 @@ const WorldMap = props => {
     }
 
     const renderCircleMarkers = () => {
-        console.log("RENDER CIRCLE STUFF prop check  ", props)
         const favBuoyIds = props.favBuoys && props.favBuoys.map(favBuoy => favBuoy.buoy.id)
         return props.buoys.map(buoy => {
             if (props.favBuoys && favBuoyIds.includes(buoy.id)) {
-                // this needs to be colorized differently
+                //* this needs to be colorized differently
                 return (
                     <CircleMarker 
                         key={buoy.station_code} 
@@ -50,7 +47,8 @@ const WorldMap = props => {
                         radius={15}
                         onClick={ () => {
                             fetchBuoyShow(buoy);
-                            fetchBuoyMetData(buoy)
+                            fetchBuoyMetData(buoy);
+                            setIsFav(true);
                         }} 
                     />
                 )   
@@ -65,6 +63,8 @@ const WorldMap = props => {
                         radius={8}
                         onClick={ () => {
                             fetchBuoyShow(buoy);
+                            fetchBuoyMetData(buoy);
+                            setIsFav(false);
                         }} 
                     />
                 )   
@@ -72,7 +72,7 @@ const WorldMap = props => {
         });
     }
 
-    
+
     return (
         <Map center={[40.586723, -73.811501]} zoom={12}>
             <TileLayer
@@ -95,12 +95,11 @@ const WorldMap = props => {
                         setSelectedBuoy(null);
                     }}
                 >
-                    {isSelectedBuoyUserFav()}
 
                     <BuoyCard 
                         selectedBuoy={selectedBuoy} 
                         isFav={isSelectedBuoyUserFav()} 
-                        toggleIsFav={setIsFavClick}
+                        toggleIsFav={setIsFav}
                         selectedBuoyMetData={selectedBuoyMetData} 
                         handleUserFavorites={props.handleUserFavorites} 
                     />
