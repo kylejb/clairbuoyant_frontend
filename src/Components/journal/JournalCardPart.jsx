@@ -13,8 +13,7 @@ const JournalCardPart = ({ entry }) => {
         <>
             <Feed>
                 <Feed.Event>
-                <Feed.Label icon='book' />
-                <Feed.Label as={() => FormModal( entry )} />
+                <Feed.Label as={() => <FormModal entry={entry} /> } />
                 <Feed.Content>
                     <Feed.Date content={`${diffDays} day(s) ago`}/>
                     <Feed.Summary>
