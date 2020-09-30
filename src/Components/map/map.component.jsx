@@ -101,7 +101,8 @@ const WorldMap = props => {
                         isFav={isSelectedBuoyUserFav()} 
                         toggleIsFav={setIsFav}
                         selectedBuoyMetData={selectedBuoyMetData} 
-                        handleUserFavorites={props.handleUserFavorites} 
+                        handleUserFavorites={props.handleUserFavorites}
+                        entrySubmitHandler={props.entrySubmitHandler}
                     />
                 </Popup>
             )};

@@ -5,10 +5,14 @@ import JournalCard from '../journal/JournalCard';
 import { Button, Container } from 'semantic-ui-react';
 
 const BuoyCard = props => {
-    const [favBtnClicked, setFavBtnClicked] = React.useState(props.isFav);
-    
+    const [favBtnClicked, setFavBtnClicked] = React.useState(props.isFav),
+        [postEntryToOptimisticRerender, setPostEntryToOptimisticRerender] = React.useState(null);
 
+    const buoyCardStateWrapper = (postEntryObj) => {
+        setPostEntryToOptimisticRerender(postEntryObj)
+    }
 
+    console.log("buoyCard ", props)
     return (
         <Container>
             <h2>{props.selectedBuoy.station_name}</h2>
@@ -20,14 +24,14 @@ const BuoyCard = props => {
                    {favBtnClicked ? "Unfavorite" : "Favorite"}
                 </Button>
 
-                <Button as={()=> <FormModal selectedBuoy={props.selectedBuoy} />} />                 
+                <Button as={()=> <FormModal selectedBuoy={props.selectedBuoy} entrySubmitHandler={props.entrySubmitHandler} entryRerenderHandler={buoyCardStateWrapper}/>} />                 
 
                 { props.selectedBuoyMetData && (
                     <ForecastCard selectedBuoyMetData={props.selectedBuoyMetData} />
                 )}
 
                 { props.selectedBuoy && (
-                    <JournalCard selectedBuoy={props.selectedBuoy} /> 
+                    <JournalCard selectedBuoy={props.selectedBuoy} entrySubmitHandler={props.entrySubmitHandler} /> 
                 )}
                 
                 
