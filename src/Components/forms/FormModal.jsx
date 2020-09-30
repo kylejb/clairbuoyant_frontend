@@ -4,22 +4,23 @@ import JournalEntryForm from '../journal/JournalEntryForm';
 
 const FormModal = (props) => {
     const [open, setOpen] = React.useState(false),
-        [entry, setEntry] = React.useState({ buoy_id: "", beach: "", session_duration: "", entry: "", wave_quality: "", session_start_time: ""})
+        [entry, setEntry] = React.useState({ buoy_id: "", beach: "", session_duration: "", entry: "", wave_quality: "", session_start_time: ""});
 
+    //! Priority before styling
     const handleEntrySubmittion = () => {
-        console.log(props)
-        console.log("form handle submit thing ", entry)
-        // if (props.entry) {
-        //     props.submitHandler(entry);
-        // } else {
-        //     props.submitHandler(entry, false);
-        // }        
+        console.log("MODAL Fn:handleEntrySubmittion; entry (modal's state)... ", entry)
+        if (props.entry) {
+            props.submitHandler(entry);
+        } else {
+            props.submitHandler(entry, false);
+        }        
     }
 
     React.useEffect(() => {
         if (props.entry) {
             setEntry(props.entry)
         }
+        // eslint-disable-next-line
     }, [])
 
 
