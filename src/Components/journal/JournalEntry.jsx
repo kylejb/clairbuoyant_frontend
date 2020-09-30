@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 const JournalEntry = ({ entry }) => {
     
-    console.log("Journal Entry ", entry)
     return (
         <>
             <h1>{entry.session_start_time}</h1>

@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import MapContainer from './MapContainer';
-import JournalContainer from './JournalContainer';
+// import JournalContainer from './JournalContainer';
 
 const BuoyContainer = props => {
+    // to be refactored to optimize flow of state 
+    // eslint-disable-next-line
     const [userEntries, setUserEntries] = useState([]);
     
     const currentUser = JSON.parse(localStorage.getItem('loggedIn'));
@@ -27,7 +29,6 @@ const BuoyContainer = props => {
 
 
     const createNewEntry = (entry) => {
-        // console.log("createNew ", entry)
         const options = {
             method: 'POST',
             headers: {
@@ -43,7 +44,6 @@ const BuoyContainer = props => {
     }
 
     const updateEntry = (entry) => {
-        // console.log("updateEntry ", entry)
         const entryId = entry.id
         const options = {
             method: 'PATCH',
@@ -74,7 +74,6 @@ const BuoyContainer = props => {
 
     return (
         <>
-            <h1>Buoy Container</h1>
             <MapContainer entrySubmitHandler={userActionOnEntryFetchWrapper} />
             {/* <JournalContainer entries={userEntries}/> */}
         </>

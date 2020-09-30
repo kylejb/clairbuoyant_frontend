@@ -27,7 +27,8 @@ const style = {
 };
 
 const ForecastDashboard = props => {
-    console.log("FD ", props)
+
+
     return (
         <>
          <Message as='h3' content={props.beach.name} style={style.h3} />
