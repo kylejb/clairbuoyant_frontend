@@ -1,10 +1,28 @@
 import React from 'react'
-import { Button, Icon, Header, Image, Modal } from 'semantic-ui-react'
+import { Button, Icon, Header, Image, Modal } from 'semantic-ui-react';
+import JournalEntryForm from '../journal/JournalEntryForm';
 
 const FormModal = (props) => {
-  const [open, setOpen] = React.useState(false)
+    const [open, setOpen] = React.useState(false),
+        [entry, setEntry] = React.useState({ buoy_id: "", beach: "", session_duration: "", entry: "", wave_quality: "", session_start_time: ""})
 
-  console.log("FormModal ", props)
+    const handleEntrySubmittion = () => {
+        console.log(props)
+        console.log("form handle submit thing ", entry)
+        // if (props.entry) {
+        //     props.submitHandler(entry);
+        // } else {
+        //     props.submitHandler(entry, false);
+        // }        
+    }
+
+    React.useEffect(() => {
+        if (props.entry) {
+            setEntry(props.entry)
+        }
+    }, [])
+
+
   return (
     <Modal
       onClose={() => setOpen(false)}
@@ -12,32 +30,31 @@ const FormModal = (props) => {
       open={open}
       trigger={(props.entry && <Icon name='book'></Icon>) || <Button>New Entry</Button>}
     >
-      <Modal.Header>Select a Photo</Modal.Header>
+      <Modal.Header>Surf Journal</Modal.Header>
       <Modal.Content image>
         <Image size='medium' src='https://react.semantic-ui.com/images/avatar/large/rachel.png' wrapped />
         <Modal.Description>
-          <Header>Default Profile Image</Header>
+          <Header>Entry</Header>
           <p>
-            We've found the following gravatar image associated with your e-mail
-            address.
+            Surfed nearby? Document your experience and find meaningful patterns to enable you to find the best waves.
           </p>
-          <p>Is it okay to use this photo?</p>
+          {<JournalEntryForm modalEntry={entry} modalEntryHandler={setEntry} />}
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
-        <Button color='black' onClick={() => setOpen(false)}>
-          Nope
+        <Button content="Cancel" color='black' onClick={() => setOpen(false)}>
+          
         </Button>
         <Button
-          content="Yep, that's me"
-          labelPosition='right'
-          icon='checkmark'
-          onClick={() => setOpen(false)}
-          positive
+        content="Save"
+        labelPosition='right'
+        icon='checkmark'
+        onClick={() => {handleEntrySubmittion(); setOpen(false)} }
+        positive
         />
       </Modal.Actions>
     </Modal>
-  )
+  );
 }
 
-export default FormModal
+export default FormModal;

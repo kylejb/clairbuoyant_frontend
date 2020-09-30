@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Segment } from 'semantic-ui-react';
-
 import WorldMap from '../Components/map/map.component';
-
 import './map.css';
 
 
@@ -15,7 +13,6 @@ import './map.css';
 const MapContainer = () => {
     const [buoys, setBuoys] = useState([]),
           [favBuoys, setFavBuoys] = useState([]);
-        // [selectedBuoy, setSelectedBuoy] = useState(null);
 
     const currentUser = JSON.parse(localStorage.getItem('loggedIn'));
 
@@ -57,37 +54,55 @@ const MapContainer = () => {
         setFavBuoys(buoys);
     }
 
-    const handleUserFavorites = async (buoyObj, isFavorited) => {
-        console.log("handle user favorites ", buoyObj, isFavorited)
+    const createUserFavBuoy = async (buoyObj) => {
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${currentUser}`
+            },
+            body: JSON.stringify(buoyObj)
+        };
+        let response = await fetch("http://localhost:3000/api/v1/favorite_buoys", options);
+        let newFavBuoy = await response.json();
 
-        // const options = {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'Accept': 'application/json',
-        //         'Authorization': `Bearer ${currentUser}`
-        //     },
-        //     body: JSON.stringify(buoyObj)
-        // };
-        // const response = await fetch("http://localhost:3000/api/v1/favorite_buoys", options);
-        // let buoys = await response.json();
-        // setFavBuoys(prevState => ({
-        //     ...prevState,
-        //     buoys
-        // }));
+    
+        const newObj = [...favBuoys, {...newFavBuoy}]
+      
+        setFavBuoys(newObj);
+    }
+
+    const deleteUserFavBuoy = async (buoyObj) => {
+        const options = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${currentUser}`
+            }
+        };
+        const response = await fetch(`http://localhost:3000/api/v1/favorite_buoys/${buoyObj.id}`, options);
+        let confirmation = await response.json();
+    }
+
+    const handleUserFavorites = (buoyObj, isFavorited) => {
+        if (isFavorited) {
+            createUserFavBuoy(buoyObj);       
+        } else {
+            deleteUserFavBuoy(buoyObj);
+        }  
     }
 
     useEffect(() => {
         fetchBuoys();
-
         if (currentUser) {
             fetchUserFavBuoys()
         }
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    
+
     return ( 
         <Segment padded={false} tertiary fluid='true' style={{marginTop: '72px'}}>
             <WorldMap buoys={buoys} favBuoys={favBuoys} handleUserFavorites={handleUserFavorites} />
