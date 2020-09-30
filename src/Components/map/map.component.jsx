@@ -5,12 +5,11 @@ import { Map, Popup, TileLayer, CircleMarker } from 'react-leaflet';
 // import { Icon } from 'leaflet';
 
 
-const WorldMap = props => {
-    const [selectedBuoy, setSelectedBuoy] = useState(null),
-          [selectedBuoyMetData, setSelectedBuoyMetData] = useState(null),
-          [isFav, setIsFav] = useState(null);
+const WorldMap = ({ buoys, favBuoys, selectedBuoy, selectedBuoyMetData, setSelectedBuoy, setSelectedBuoyMetData, handleUserFavorites, entrySubmitHandler }) => {
+    // eslint-disable-next-line
+    const [isFav, setIsFav] = useState(null);
 
-    // refactor to async/await - should load data faster
+
     const fetchBuoyShow = async (buoyObj) => {
         const response = await fetch(`http://localhost:3000/api/v1/buoys/${buoyObj.id}`)
         let buoy = await response.json();
@@ -25,7 +24,7 @@ const WorldMap = props => {
 
     const isSelectedBuoyUserFav = () => {
 
-        if (props.favBuoys.find(favBuoy => favBuoy.buoy.id === selectedBuoy.id)) {
+        if (favBuoys.find(favBuoy => favBuoy.buoy.id === selectedBuoy.id)) {
             return true
         } else {
             return false
@@ -33,9 +32,9 @@ const WorldMap = props => {
     }
 
     const renderCircleMarkers = () => {
-        const favBuoyIds = props.favBuoys && props.favBuoys.map(favBuoy => favBuoy.buoy.id)
-        return props.buoys.map(buoy => {
-            if (props.favBuoys && favBuoyIds.includes(buoy.id)) {
+        const favBuoyIds = favBuoys && favBuoys.map(favBuoy => favBuoy.buoy.id)
+        return buoys.map(buoy => {
+            if (favBuoys && favBuoyIds.includes(buoy.id)) {
                 //* this needs to be colorized differently
                 return (
                     <CircleMarker 
@@ -101,8 +100,8 @@ const WorldMap = props => {
                         isFav={isSelectedBuoyUserFav()} 
                         toggleIsFav={setIsFav}
                         selectedBuoyMetData={selectedBuoyMetData} 
-                        handleUserFavorites={props.handleUserFavorites}
-                        entrySubmitHandler={props.entrySubmitHandler}
+                        handleUserFavorites={handleUserFavorites}
+                        entrySubmitHandler={entrySubmitHandler}
                     />
                 </Popup>
             )};
