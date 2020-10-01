@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import Search from './search.component';
 import BuoyCard from '../buoy/BuoyCard';
-import { Map, Popup, TileLayer, CircleMarker } from 'react-leaflet';
-// import { Icon } from 'leaflet';
+// import BuoyIcon from '../../../buoyIcon.png'
+import { Map, Popup, TileLayer, CircleMarker, Marker } from 'react-leaflet';
+const L = require('leaflet');
+
 
 
 const WorldMap = ({ buoys, favBuoys, selectedBuoy, selectedBuoyMetData, setSelectedBuoy, setSelectedBuoyMetData, handleUserFavorites, entrySubmitHandler }) => {
     // eslint-disable-next-line
     const [isFav, setIsFav] = useState(null);
+    
+    const buoyImg = L.icon({
+        iconUrl: require('../buoy/buoyIcon.png'),
+        iconSize: [64, 64]
+    })
 
 
     const fetchBuoyShow = async (buoyObj) => {
