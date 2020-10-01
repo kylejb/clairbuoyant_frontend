@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import Header from './Components/Header';
 import LoginForm from './Components/forms/UserLoginForm'
 import StaticLayout from './Components/StaticLayout';
 
 
-const App = () => {
+const App = (props) => {
   const [selectedBeach, setSelectedBeach] = useState(null),
         // eslint-disable-next-line
         [currentUser, setCurrentUser] = useState(null);
@@ -26,6 +26,7 @@ const App = () => {
     let response = await fetch("http://localhost:3000/api/v1/login", options)
     let userData = await response.json();
     setCurrentUser(userData)
+    props.history.push('/home');
     window.localStorage.setItem("loggedIn", JSON.stringify(userData.jwt));
   }
 
@@ -33,7 +34,6 @@ const App = () => {
     setCurrentUser(false)
     window.localStorage.removeItem("loggedIn");
   }
-
 
   return (
     <> 
@@ -45,4 +45,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default withRouter(App);
