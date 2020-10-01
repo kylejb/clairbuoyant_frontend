@@ -13,8 +13,7 @@ const greenMarker = L.icon({
   });
 
 const Search = props => {
-
-    return <ReactLeafletSearch position="bottomright" markerIcon={greenMarker} />;
+    return <ReactLeafletSearch position="bottomright" zoom={10} markerIcon={greenMarker} />;
 }
 
 export default Search;
