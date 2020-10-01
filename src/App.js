@@ -3,9 +3,6 @@ import { Route } from 'react-router-dom';
 import Header from './Components/Header';
 import LoginForm from './Components/forms/UserLoginForm'
 import StaticLayout from './Components/StaticLayout';
-// import Footer from './Components/Footer'
-// import styled from 'styled-components';
-
 
 
 const App = () => {
