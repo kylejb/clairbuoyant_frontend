@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import HeaderSearch from './HeaderSearch';
 import { Link, withRouter } from 'react-router-dom';
-import { Container, Dropdown, Image, Menu, Icon } from 'semantic-ui-react';
+import { Container, Dropdown, Menu, Icon } from 'semantic-ui-react';
 
 const Header = props => {
     const [namedBeaches, setNamedBeaches] = useState([]);
@@ -32,7 +32,7 @@ const Header = props => {
         <Menu fixed='top' stackable inverted>
             <Container>
                 <Menu.Item as='a' header>
-                <Icon size='mini' style={{ marginRight: '1.5em' }} />
+                <Icon size='large' name='sun outline' />
                     the Beach Buoys!
                 </Menu.Item>
                 <Menu.Item as={Link} to='/home'>Home</Menu.Item>

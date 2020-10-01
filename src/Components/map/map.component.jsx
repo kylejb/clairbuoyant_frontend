@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import Search from './search.component';
 import BuoyCard from '../buoy/BuoyCard';
-// import BuoyIcon from '../../../buoyIcon.png'
 import { Map, Popup, TileLayer, CircleMarker, Marker } from 'react-leaflet';
+
+
 const L = require('leaflet');
-
-
+const buoyImg = L.icon({
+    iconUrl: require('../buoy/buoyIcon.png'),
+    iconSize: [64, 64],
+    iconAnchor: [64, 32]
+})
 
 const WorldMap = ({ buoys, favBuoys, selectedBuoy, selectedBuoyMetData, setSelectedBuoy, setSelectedBuoyMetData, handleUserFavorites, entrySubmitHandler }) => {
     // eslint-disable-next-line
     const [isFav, setIsFav] = useState(null);
     
-    const buoyImg = L.icon({
-        iconUrl: require('../buoy/buoyIcon.png'),
-        iconSize: [64, 64]
-    })
 
 
     const fetchBuoyShow = async (buoyObj) => {
@@ -44,13 +44,13 @@ const WorldMap = ({ buoys, favBuoys, selectedBuoy, selectedBuoyMetData, setSelec
             if (favBuoys && favBuoyIds.includes(buoy.id)) {
                 //* this needs to be colorized differently
                 return (
-                    <CircleMarker 
+                    <Marker 
+                        icon={buoyImg}
                         key={buoy.station_code} 
-                        center={[
+                        position={[
                             buoy.latitude, 
                             buoy.longitude
                         ]}
-                        radius={15}
                         onClick={ () => {
                             fetchBuoyShow(buoy);
                             fetchBuoyMetData(buoy);
@@ -66,7 +66,7 @@ const WorldMap = ({ buoys, favBuoys, selectedBuoy, selectedBuoyMetData, setSelec
                             buoy.latitude, 
                             buoy.longitude
                         ]}
-                        radius={8}
+                        radius={7}
                         onClick={ () => {
                             fetchBuoyShow(buoy);
                             fetchBuoyMetData(buoy);
