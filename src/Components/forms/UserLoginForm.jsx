@@ -1,17 +1,19 @@
 import React, { useState } from 'react';  
-import { Button, Form, Header, Image, Message, Input, Container } from 'semantic-ui-react';
+import { Button, Form, Header, Icon, Message, Input, Grid } from 'semantic-ui-react';
 
 const UserLoginForm = props => {
     const [email, setEmail] = useState(""),
     [password, setPassword] = useState("");
 
      
-    return (
-
-       <Container>
-          <Header as='h2' color='teal' textAlign='center'>
-            <Image src='/logo.png' /> Login to your account
+  return (   
+    <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+      <Grid.Column style={{ maxWidth: 450 }}>
+        <Header as='h2' color='teal' textAlign='center'>
+          <Icon size='large' name='sun outline' />
+            the Beach Buoys! 
           </Header>
+            Login to your account
           <Form>
             <Form.Group width="equal">
               <Form.Field 
@@ -47,8 +49,9 @@ const UserLoginForm = props => {
             {/* eslint-disable-next-line */}
             New to us? <a>Sign Up</a>
           </Message>
-      </Container>
-    );
+      </Grid.Column>
+    </Grid> 
+  );
 }
 
 export default UserLoginForm;
