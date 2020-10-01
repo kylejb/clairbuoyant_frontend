@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Segment } from 'semantic-ui-react';
 import WorldMap from '../Components/map/map.component';
 import './map.css';
-
-
-// const buoyIcon = new Icon({
-//     iconUrl: '../Assets/buoy.svg',
-//     iconSize: [25, 25]
-// });
 
 
 const MapContainer = (props) => {
@@ -121,18 +114,16 @@ const MapContainer = (props) => {
 
 
     return ( 
-        <Segment padded={false} tertiary fluid='true' style={{marginTop: '72px'}}>
-            <WorldMap 
-                buoys={buoys} 
-                favBuoys={favBuoys} 
-                handleUserFavorites={handleUserFavorites} 
-                entrySubmitHandler={entrySubmitHandlerHelper}
-                selectedBuoy={selectedBuoy}
-                setSelectedBuoy={setSelectedBuoy}
-                selectedBuoyMetData={selectedBuoyMetData}
-                setSelectedBuoyMetData={setSelectedBuoyMetData}
-            />
-        </Segment>
+        <WorldMap 
+            buoys={buoys} 
+            favBuoys={favBuoys} 
+            handleUserFavorites={handleUserFavorites} 
+            entrySubmitHandler={entrySubmitHandlerHelper}
+            selectedBuoy={selectedBuoy}
+            setSelectedBuoy={setSelectedBuoy}
+            selectedBuoyMetData={selectedBuoyMetData}
+            setSelectedBuoyMetData={setSelectedBuoyMetData}
+        />
     );
 }
 

@@ -14,7 +14,7 @@ const greenMarker = L.icon({
 
 const Search = props => {
 
-    return <ReactLeafletSearch position="topleft" markerIcon={greenMarker} />;
+    return <ReactLeafletSearch position="bottomright" markerIcon={greenMarker} />;
 }
 
 export default Search;
