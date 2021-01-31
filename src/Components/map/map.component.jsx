@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Search from './search.component';
+// import Search from './search.component';
 import BuoyCard from '../buoy/BuoyCard';
 import { MapContainer, Popup, TileLayer, CircleMarker, Marker, ZoomControl } from 'react-leaflet';
 
