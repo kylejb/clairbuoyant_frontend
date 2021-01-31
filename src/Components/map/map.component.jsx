@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Search from './search.component';
 import BuoyCard from '../buoy/BuoyCard';
-import { Map, Popup, TileLayer, CircleMarker, Marker, ZoomControl } from 'react-leaflet';
+import { MapContainer, Popup, TileLayer, CircleMarker, Marker, ZoomControl } from 'react-leaflet';
 
 
 const L = require('leaflet');
@@ -80,7 +80,7 @@ const WorldMap = ({ buoys, favBuoys, selectedBuoy, selectedBuoyMetData, setSelec
 
     // center={[40.586723, -73.811501]} zoom={12}
     return (
-        <Map center={[40.586723, -73.811501]} zoom={4} zoomControl={false}>
+        <MapContainer center={[40.586723, -73.811501]} zoom={4} zoomControl={false} scrollWheelZoom={false}>
             <TileLayer
                 url='https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}'
                 maxZoom={13}
@@ -90,7 +90,7 @@ const WorldMap = ({ buoys, favBuoys, selectedBuoy, selectedBuoyMetData, setSelec
 
             {renderCircleMarkers()}
 
-            <Search />
+            {/* <Search /> */}
 
             { selectedBuoy && (
                 <Popup
@@ -113,7 +113,7 @@ const WorldMap = ({ buoys, favBuoys, selectedBuoy, selectedBuoyMetData, setSelec
                     />
                 </Popup>
             )};
-        </Map>
+        </MapContainer>
     );
 }
 
