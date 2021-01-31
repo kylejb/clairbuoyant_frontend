@@ -8,7 +8,7 @@ const Header = props => {
     const currentUser = JSON.parse(localStorage.getItem('loggedIn'));
 
     const getNamedBeaches = async () => {
-        const response = await fetch('http://localhost:3000/api/v1/beaches');
+        const response = await fetch('http://localhost:8000/beaches');
         let data = await response.json();
         setNamedBeaches(data);
     }

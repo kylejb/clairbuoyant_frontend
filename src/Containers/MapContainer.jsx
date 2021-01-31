@@ -21,7 +21,7 @@ const MapContainer = (props) => {
     }
 
     const fetchSelectedBuoy = async (buoyObj) => {
-        const response = await fetch(`http://localhost:3000/api/v1/buoys/${buoyObj.id}`)
+        const response = await fetch(`http://localhost:8000/buoys/${buoyObj.id}`)
         let buoy = await response.json();
         setSelectedBuoy(buoy);
     }
@@ -30,22 +30,15 @@ const MapContainer = (props) => {
     const parseBuoyData = (buoyObjArr) => {
         const parsedBuoyObjArr = [];
         for (const buoy of buoyObjArr) {
-            const newBuoyObj = {}, [latitude, longitude] = [buoy.latitude, buoy.longitude], stationCode = buoy.station_code;
-            newBuoyObj.name = buoy.station_name; newBuoyObj.latitude = latitude; newBuoyObj.longitude = longitude; newBuoyObj.station_code = stationCode; newBuoyObj.id = buoy.id;
+            const newBuoyObj = {}, [longitude, latitude] = buoy.location.coordinates, stationCode = buoy.station_id;
+            newBuoyObj.name = buoy.name; newBuoyObj.latitude = latitude; newBuoyObj.longitude = longitude; newBuoyObj.station_id = stationCode; newBuoyObj.id = buoy.id;
             parsedBuoyObjArr.push(newBuoyObj);
         }
         setBuoys(parsedBuoyObjArr);
     }
 
     const fetchBuoys = async () => {
-        const options = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        };
-        const response = await fetch("http://localhost:3000/api/v1/buoys", options);
+        const response = await fetch("http://localhost:8000/buoys/");
         let buoys = await response.json();
         parseBuoyData(buoys);
     }
@@ -59,7 +52,7 @@ const MapContainer = (props) => {
                 'Authorization': `Bearer ${currentUser}`
             }
         };
-        const response = await fetch("http://localhost:3000/api/v1/favorite_buoys", options);
+        const response = await fetch("http://localhost:8000/favorite_buoys", options);
         let buoys = await response.json();
         setFavBuoys(buoys);
     }
@@ -74,7 +67,7 @@ const MapContainer = (props) => {
             },
             body: JSON.stringify(buoyObj)
         };
-        let response = await fetch("http://localhost:3000/api/v1/favorite_buoys", options);
+        let response = await fetch("http://localhost:8000/favorite_buoys", options);
         let newFavBuoy = await response.json();
 
         const newObj = [...favBuoys, {...newFavBuoy}];
@@ -90,7 +83,7 @@ const MapContainer = (props) => {
                 'Authorization': `Bearer ${currentUser}`
             }
         };
-        const response = await fetch(`http://localhost:3000/api/v1/favorite_buoys/${buoyObj.id}`, options);
+        const response = await fetch(`http://localhost:8000/favorite_buoys/${buoyObj.id}`, options);
         let confirmation = await response.json();
         fetchUserFavBuoys();
         return confirmation

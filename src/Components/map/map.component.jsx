@@ -18,14 +18,15 @@ const WorldMap = ({ buoys, favBuoys, selectedBuoy, selectedBuoyMetData, setSelec
 
 
     const fetchBuoyShow = async (buoyObj) => {
-        const response = await fetch(`http://localhost:3000/api/v1/buoys/${buoyObj.id}`)
+        const response = await fetch(`http://localhost:8000/buoys/${buoyObj.id}`)
         let buoy = await response.json();
         setSelectedBuoy(buoy);
     }
 
     const fetchBuoyMetData = async (buoyObj) => {
-        const response = await fetch(`http://localhost:3000/api/v1/buoys/${buoyObj.id}/meteorological_data`)
+        const response = await fetch(`http://localhost:8000/buoys/${buoyObj.id}`)
         let buoyData = await response.json();
+        console.log("BD", buoyData)
         setSelectedBuoyMetData(buoyData);
     }
 
