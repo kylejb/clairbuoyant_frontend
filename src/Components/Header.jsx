@@ -60,7 +60,7 @@ const Header = props => {
                 </Dropdown.Menu>
                 </Dropdown>
                 {currentUser ? <Menu.Item>Logout</Menu.Item> : <Menu.Item as={Link} to='/login'>Login</Menu.Item>}
-                <Menu.Item> <HeaderSearch beaches={namedBeaches} selectedBeachHelper={props.selectedBeachHelper}/> </Menu.Item>
+                <Menu.Item> <HeaderSearch beaches={namedBeaches} /> </Menu.Item>
             </Container>
         </Menu>
     );

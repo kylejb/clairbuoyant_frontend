@@ -16,9 +16,9 @@ const HeaderDropDownSearch = ( { beaches, selectedBeachHelper, history } ) => {
   
   const onCloseHelper = (e) => {
     if (e) {
-      const selectedBeach = beaches.filter(beachObj => beachObj.name === e.target.textContent)
-      const urlPrefix = selectedBeach[0].name.replace(/\s+/g, '-').toLowerCase();
-      selectedBeachHelper(selectedBeach[0])
+      const selectedBeach = beaches.filter(beachObj => beachObj?.name === e.target.textContent)
+      const urlPrefix = selectedBeach[0]?.name.replace(/\s+/g, '-').toLowerCase();
+      // selectedBeachHelper(selectedBeach[0])
       history.push(`/forecast/${urlPrefix}`)
     } else {
       return null

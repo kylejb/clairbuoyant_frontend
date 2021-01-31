@@ -6,13 +6,9 @@ import StaticLayout from './Components/StaticLayout';
 
 
 const App = (props) => {
-  const [selectedBeach, setSelectedBeach] = useState(null),
-        // eslint-disable-next-line
-        [currentUser, setCurrentUser] = useState(null);
+    // eslint-disable-next-line
+    const [currentUser, setCurrentUser] = useState(null);
   
-  const selectedBeachHelper = (beachObj) => {
-    setSelectedBeach(beachObj)
-  }
 
   const handleUserLogin = async (email, password) => {
     const options = {
@@ -37,10 +33,9 @@ const App = (props) => {
 
   return (
     <> 
-      <Route path="/" render={ ( routerProps ) => <Header {...routerProps} handleUserLogout={handleUserLogout} selectedBeachHelper={selectedBeachHelper} />} />
-      <StaticLayout beach={selectedBeach} />
+      <Route path="/" render={ ( routerProps ) => <Header {...routerProps} handleUserLogout={handleUserLogout} />} />
+      <StaticLayout />
       <Route exact path="/login" render={() => <LoginForm handleUserLogin={handleUserLogin} />} />
-      {/* <Footer /> */}
     </>
   );
 }
