@@ -1,3 +1,6 @@
+import rbush from 'rbush';
+
+
 function layerFactory(L) {
   var CanvasIconLayer = (L.Layer ? L.Layer : L.Class).extend({
 
@@ -29,7 +32,7 @@ function layerFactory(L) {
 
       markers.forEach(function (marker) {
 
-        if (!((marker.options.pane == 'markerPane') && marker.options.icon))
+        if (!((marker.options.pane === 'markerPane') && marker.options.icon))
         {
           console.error('Layer isn\'t a marker');
           return;
@@ -40,7 +43,7 @@ function layerFactory(L) {
         var s = self._addMarker(marker,latlng,isDisplaying);
 
         //Only add to Point Lookup if we are on map
-        if (isDisplaying ===true) tmpMark.push(s[0]);
+        if (isDisplaying === true) tmpMark.push(s[0]);
 
         tmpLatLng.push(s[1]);
       });
@@ -65,7 +68,7 @@ function layerFactory(L) {
 
     addLayer: function (layer) {
 
-      if ((layer.options.pane == 'markerPane') && layer.options.icon) this.addMarker(layer);
+      if ((layer.options.pane === 'markerPane') && layer.options.icon) this.addMarker(layer);
       else console.error('Layer isn\'t a marker');
     },
 
