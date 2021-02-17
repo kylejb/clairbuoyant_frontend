@@ -1,11 +1,10 @@
-import React from 'react';
 import { Card } from 'semantic-ui-react';
 import WindDirection from '../forecast/wind/WindDirection';
 import ForecastCardPart from './ForecastCardPart';
 
 const ForecastCard = props => {
 
-  
+
   return (
     <Card>
       <Card.Content>
@@ -16,7 +15,6 @@ const ForecastCard = props => {
       </Card.Content>
     </Card>
   );
-}
+};
 
 export default ForecastCard;
-

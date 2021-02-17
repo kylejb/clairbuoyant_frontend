@@ -1,25 +1,25 @@
-import React, { useState } from 'react';  
+import { useState } from 'react';
 import { Button, Form, Header, Icon, Message, Input, Grid } from 'semantic-ui-react';
 
 const UserLoginForm = props => {
-    const [email, setEmail] = useState(""),
-    [password, setPassword] = useState("");
+  const [email, setEmail] = useState(""),
+        [password, setPassword] = useState("");
 
-     
-  return (   
+
+  return (
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as='h2' color='teal' textAlign='center'>
           <Icon size='large' name='sun outline' />
-            the Beach Buoys! 
+            clairBuoyant!
           </Header>
             Login to your account
           <Form>
             <Form.Group width="equal">
-              <Form.Field 
-                control={Input} 
-                icon='user' 
-                iconPosition='left' 
+              <Form.Field
+                control={Input}
+                icon='user'
+                iconPosition='left'
                 label='email'
                 placeholder='E-mail address'
                 value={email}
@@ -35,9 +35,9 @@ const UserLoginForm = props => {
                 value={password}
                 onChange={e => setPassword(e.target.value)}
               />
-    
-              <Button 
-                color='teal' 
+
+              <Button
+                color='teal'
                 size='large'
                 onClick={() => props.handleUserLogin(email, password)}
               >
@@ -46,12 +46,11 @@ const UserLoginForm = props => {
             </Form.Group>
           </Form>
           <Message>
-            {/* eslint-disable-next-line */}
-            New to us? <a>Sign Up</a>
+            New to us? Sign Up
           </Message>
       </Grid.Column>
-    </Grid> 
+    </Grid>
   );
-}
+};
 
 export default UserLoginForm;

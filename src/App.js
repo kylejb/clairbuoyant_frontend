@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import Header from './Components/Header';
 import LoginForm from './Components/forms/UserLoginForm'
@@ -6,9 +6,9 @@ import StaticLayout from './Components/StaticLayout';
 
 
 const App = (props) => {
-    // eslint-disable-next-line
-    const [currentUser, setCurrentUser] = useState(null);
-  
+  // eslint-disable-next-line
+  const [currentUser, setCurrentUser] = useState(null);
+
 
   const handleUserLogin = async (email, password) => {
     const options = {
@@ -18,8 +18,8 @@ const App = (props) => {
         'Accept': 'application/json',
       },
       body: JSON.stringify({user: {email, password}})
-    }
-    let response = await fetch("http://localhost:3000/api/v1/login", options)
+    };
+    let response = await fetch("http://localhost:3000/api/v1/login", options);
     let userData = await response.json();
     setCurrentUser(userData)
     props.history.push('/home');
@@ -27,17 +27,17 @@ const App = (props) => {
   }
 
   const handleUserLogout = () => {
-    setCurrentUser(false)
+    setCurrentUser(false);
     window.localStorage.removeItem("loggedIn");
-  }
+  };
 
   return (
-    <> 
+    <>
       <Route path="/" render={ ( routerProps ) => <Header {...routerProps} handleUserLogout={handleUserLogout} />} />
       <StaticLayout />
       <Route exact path="/login" render={() => <LoginForm handleUserLogin={handleUserLogin} />} />
     </>
   );
-}
+};
 
 export default withRouter(App);
