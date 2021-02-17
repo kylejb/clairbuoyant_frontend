@@ -1,19 +1,17 @@
-// src=medium.com/@zimrick
-
-import React, { useState, useEffect } from "react"
-import { geoEqualEarth, geoPath } from "d3-geo"
-import { feature } from "topojson-client"
+import { useState, useEffect } from "react";
+import { geoEqualEarth, geoPath } from "d3-geo";
+import { feature } from "topojson-client";
 
 const buoys = [
   {name: "New York Harbor Entrance (44065)", coordinates: [-73.703, 40.369], population: 20000000 }
-]
+];
 
 const projection = geoEqualEarth()
   .scale(160)
-  .translate([ 800 / 2, 450 / 2 ])
+  .translate([ 800 / 2, 450 / 2 ]);
 
 const WorldMap = () => {
-  const [geographies, setGeographies] = useState([])
+  const [geographies, setGeographies] = useState([]);
 
   useEffect(() => {
     fetch("/world-110m.json")
@@ -24,17 +22,17 @@ const WorldMap = () => {
         }
         response.json().then(worlddata => {
           setGeographies(feature(worlddata, worlddata.objects.countries).features)
-        })
-      })
-  }, [])
+        });
+      });
+  }, []);
 
   const handleCountryClick = countryIndex => {
-    console.log("Clicked on country: ", geographies[countryIndex])
-  }
+    console.log("Clicked on country: ", geographies[countryIndex]);
+  };
 
   const handleMarkerClick = i => {
-    console.log("Marker: ", buoys[i])
-  }
+    console.log("Marker: ", buoys[i]);
+  };
 
   return (
     <svg width={ 800 } height={ 450 } viewBox="0 0 800 450">
@@ -70,7 +68,7 @@ const WorldMap = () => {
         }
       </g>
     </svg>
-  )
-}
+  );
+};
 
-export default WorldMap
+export default WorldMap;

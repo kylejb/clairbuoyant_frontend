@@ -1,28 +1,36 @@
-import React from 'react'
+import { useState, useEffect} from 'react'
 import { Button, Icon, Header, Image, Modal } from 'semantic-ui-react';
 import JournalEntryForm from '../journal/JournalEntryForm';
 
 const FormModal = (props) => {
-    const [open, setOpen] = React.useState(false),
-        [entry, setEntry] = React.useState({ buoy_id: ((props.selectedBuoy && props.selectedBuoy.id) || (props.entry && props.entry.buoy_id)), beach: "", session_duration: "", entry: "", wave_quality: "", session_start_time: ""});
-        const handleEntrySubmittion = () => {
-          if (props.entry) {
-            props.entryRerenderHandler(entry)
-            props.entrySubmitHandler(entry);
-        } else {
-            props.entryRerenderHandler(entry)
-            props.entrySubmitHandler(entry, false);
-        }        
-    }
+  const [open, setOpen] = useState(false),
+      [entry, setEntry] = useState({
+        buoy_id: ((props.selectedBuoy && props.selectedBuoy.id) || (props.entry && props.entry.buoy_id)),
+        beach: "",
+        session_duration: "",
+        entry: "",
+        wave_quality: "",
+        session_start_time: ""
+      });
 
-    React.useEffect(() => {
-        if (props.entry) {
-            setEntry(props.entry)
-        }
-        // eslint-disable-next-line
-    }, [])
+  const handleEntrySubmittion = () => {
+    if (props.entry) {
+      props.entryRerenderHandler(entry);
+      props.entrySubmitHandler(entry);
+    } else {
+        props.entryRerenderHandler(entry);
+        props.entrySubmitHandler(entry, false);
+    };
+  };
 
-    console.log("form modal props ", props)
+  useEffect(() => {
+    if (props.entry) {
+        setEntry(props.entry);
+    };
+    // eslint-disable-next-line
+  }, []);
+
+
   return (
     <Modal
       onClose={() => setOpen(false)}
@@ -43,7 +51,7 @@ const FormModal = (props) => {
       </Modal.Content>
       <Modal.Actions>
         <Button content="Cancel" color='black' onClick={() => setOpen(false)}>
-          
+
         </Button>
         <Button
         content="Save"
@@ -55,6 +63,6 @@ const FormModal = (props) => {
       </Modal.Actions>
     </Modal>
   );
-}
+};
 
 export default FormModal;

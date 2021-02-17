@@ -1,14 +1,15 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { Card } from 'semantic-ui-react';
 import JournalCardPart from './JournalCardPart';
 
+
 const JournalCard = props => {
-  const [patchEntryToOptimisticRerender, setPatchEntryToOptimisticRerender] = React.useState(null),
-    [postEntryToOptimisticRerender, setPostEntryToOptimisticRerender] = React.useState(null)
+  const [patchEntryToOptimisticRerender, setPatchEntryToOptimisticRerender] = useState(null),
+    [postEntryToOptimisticRerender, setPostEntryToOptimisticRerender] = useState(null);
 
   const journalCardStateWrapper = (patchEntryObj) => {
-    setPatchEntryToOptimisticRerender(patchEntryObj)
-  }
+    setPatchEntryToOptimisticRerender(patchEntryObj);
+  };
 
   const renderJournalCardEntriesFeed = () => {
     return props.selectedBuoy.entries.map(entry => {
@@ -16,14 +17,14 @@ const JournalCard = props => {
         return <JournalCardPart key={patchEntryToOptimisticRerender.id} entry={patchEntryToOptimisticRerender} entrySubmitHandler={props.entrySubmitHandler} entryRerenderHandler={journalCardStateWrapper}/>
       } else {
         return <JournalCardPart key={entry.id} entry={entry} entrySubmitHandler={props.entrySubmitHandler} entryRerenderHandler={journalCardStateWrapper}/>
-      }
+      };
     });
-  }
+  };
 
-  React.useEffect(() => {
-    setPostEntryToOptimisticRerender(props.newEntry)
-  }, [props.newEntry])
-  
+  useEffect(() => {
+    setPostEntryToOptimisticRerender(props.newEntry);
+  }, [props.newEntry]);
+
   return (
     <Card>
       <Card.Content>
@@ -33,12 +34,11 @@ const JournalCard = props => {
       <Card.Content>
        {renderJournalCardEntriesFeed()}
         {postEntryToOptimisticRerender && (
-            <JournalCardPart entry={postEntryToOptimisticRerender} entrySubmitHandler={props.entrySubmitHandler} entryRerenderHandler={journalCardStateWrapper}/>
+          <JournalCardPart entry={postEntryToOptimisticRerender} entrySubmitHandler={props.entrySubmitHandler} entryRerenderHandler={journalCardStateWrapper}/>
         )}
       </Card.Content>
-
     </Card>
   );
-}
+};
 
 export default JournalCard;
