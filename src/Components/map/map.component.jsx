@@ -58,7 +58,7 @@ const WorldMap = ({
         return (
           <Marker
             icon={buoyImg}
-            key={buoy.station_code}
+            key={buoy.station_id}
             position={[
               buoy.latitude,
               buoy.longitude
@@ -73,7 +73,7 @@ const WorldMap = ({
       } else {
         return (
           <CircleMarker
-            key={buoy.station_code}
+            key={buoy.station_id}
             center={[
               buoy.latitude,
               buoy.longitude
